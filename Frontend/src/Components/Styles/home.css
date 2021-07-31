@@ -1,0 +1,164 @@
+.gradient-primary {
+  background-image: linear-gradient(
+    to left bottom,
+    #0d5bad,
+    #1c7bc1,
+    #409bd2,
+    #6abae0,
+    #96d8ef
+  );
+}
+
+.white-text {
+  color: white;
+}
+
+.no-border {
+  border: 0px;
+}
+.neo-card {
+  border-radius: 52px;
+  background: #5d77d5;
+  border: 1px solid transparent;
+  box-shadow: inset -12px -12px 24px #415395, inset 12px 12px 24px #799bff;
+  transform: scale(1);
+  transition: transform 01s;
+}
+.neo-card:hover {
+  transform: scale(1.025);
+  transition: transform 0.5s;
+}
+.dashboard-primary {
+  padding: 5vh;
+  padding-left: 5vh;
+  animation-name: slideinright;
+  animation-duration: 1s;
+}
+
+.Button-pad:hover {
+  background-color: white;
+  border-color: #124191;
+  color: #124191;
+  text-decoration: none;
+  color: white;
+}
+
+.Button-font {
+  text-decoration: none;
+  color: white;
+}
+
+.Button-font:hover {
+  text-decoration: none;
+  color: #124191;
+}
+
+.animation-left {
+  animation-name: slideinleft;
+  animation-duration: 1s;
+}
+
+.animation-right {
+  animation-name: slideinright;
+  animation-duration: 1s;
+}
+
+@keyframes slideinright {
+  0% {
+    left: 200px;
+    top: 0px;
+  }
+  50% {
+    left: 100px;
+    top: 0px;
+  }
+  100% {
+    left: 0px;
+    top: 0px;
+  }
+}
+
+@keyframes slideinleft {
+  0% {
+    right: 200px;
+    top: 0px;
+  }
+  50% {
+    right: 100px;
+    top: 0px;
+  }
+  100% {
+    right: 0px;
+    top: 0px;
+  }
+}
+.AM,
+.WI,
+.QCD,
+.CN {
+  background-color: #2f5cb6;
+}
+.nav-menu ul {
+  list-style: none;
+  background-color: #fff;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-menu li {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.3em;
+  line-height: 40px;
+  height: 40px;
+  border-bottom: 1px solid #888;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  transition: 0.3s background-color;
+}
+
+.nav-menu a:hover {
+  background-color: #005f5f;
+  color: white;
+  text-decoration: none;
+}
+
+.nav-menu a.active {
+  background-color: #fff;
+  color: #444;
+  cursor: default;
+}
+
+@media screen and (min-width: 600px) {
+  .nav-menu li {
+    width: 320px;
+    border-bottom: none;
+    height: 40px;
+    line-height: 40px;
+    font-size: 1em;
+  }
+
+  /* Option 1 - Display Inline */
+  .nav-menu li {
+    display: inline-block;
+    width: 25%;
+  }
+
+  /* Options 2 - Float
+.nav li {
+  float: left;
+}
+.nav ul {
+  overflow: auto;
+  width: 600px;
+  margin: 0 auto;
+}
+.nav {
+  background-color: #444;
+}
+*/
+}

@@ -1,0 +1,31 @@
+.title-button1 {
+  color: white;
+  font-size: 1.5rem;
+  padding: 0.5rem 2rem;
+  text-align: center;
+  font-family: Arial, Regular;
+  border-radius: 15px;
+  background-image: linear-gradient(
+    to right bottom,
+    #1c6cae,
+    #0c69ba,
+    #1265c5,
+    #295fce,
+    #4258d5
+  );
+  width: max-content;
+  margin-left: 78px;
+  margin-top: 10px;
+}
+.home-grid-menu {
+  height: 25vh;
+  margin-bottom: 1.5rem;
+  width: 80%;
+}
+@media screen and (min-width: 1200px) and (max-width: 1400px) {
+  .home-grid-menu {
+    width: 180px;
+    margin: 1rem;
+    height: 150px;
+  }
+}

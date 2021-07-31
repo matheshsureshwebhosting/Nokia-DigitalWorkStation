@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+.content {
+  font-family: 'Roboto', sans-serif;
+}
+
+.process {
+  text-align: center;
+  margin-bottom: 10px;
+}
+.step-title {
+  color: rgb(255, 255, 255);
+  border-radius: 15px;
+  background-image: linear-gradient(
+    to right bottom,
+    #1c6cae,
+    #0c69ba,
+    #1265c5,
+    #295fce,
+    #4258d5
+  );
+  text-align: center !important;
+  font-size: 1.4rem;
+  padding: 10px 0;
+  margin: 0 15rem;
+}
+label {
+  display: block;
+  color: #7d7d7d;
+}
+.floatBlock {
+  padding: 0 10px;
+}
+
+.labelish {
+  color: #7d7d7d;
+  margin: 0;
+  text-align: center;
+  font-size: large;
+  font-weight: 400;
+}
+
+.paymentOptions {
+  order: none;
+  display: flex;
+  justify-content: center;
+  break-before: always;
+  padding: 10px 0;
+}
+
+.date-time {
+  width: 190px;
+}
+
+#purchaseOrder {
+  margin: 0 0 2em 0;
+}
+
+.formCard {
+  background: transparent linear-gradient(115deg, #186dab 0%, #5252df 100%) 0%
+    0% no-repeat padding-box;
+  border-radius: 10px;
+  opacity: 1;
+  width: 350px;
+  height: 175px;
+  /* display: flex; */
+  /* justify-content: center; */
+  /* flex-direction: column; */
+  /* align-items: center; */
+}
+.flcc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+}
+.animation {
+  animation-name: slideinleft;
+  animation-duration: 1s;
+}
+
+.condition {
+  color: #124191;
+}
+.vacuum-menu-col {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  width: 100%;
+  height: 79vh;
+}
+.content {
+  max-height: 90vh;
+}
+.steps-video-div {
+  height: 75vh;
+  width: 100%;
+}
+@keyframes slideinright {
+  0% {
+    left: 200px;
+    top: 0px;
+  }
+  50% {
+    left: 100px;
+    top: 0px;
+  }
+  100% {
+    left: 0px;
+    top: 0px;
+  }
+}
+
+@keyframes slideinleft {
+  0% {
+    right: 200px;
+    top: 0px;
+  }
+  50% {
+    right: 100px;
+    top: 0px;
+  }
+  100% {
+    right: 0px;
+    top: 0px;
+  }
+}
+
+.input_field {
+  color: #124191;
+}
+
+.labelish {
+  color: black;
+}
+
+.form_fields {
+  margin-bottom: 0.2rem;
+}
+.card-resize {
+  height: max-content;
+}
+.anim-typewriter {
+  animation: typewriter 4s steps(44) 1s 1 normal both,
+    blinkTextCursor 500ms steps(44) infinite normal;
+}
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 24em;
+  }
+}
+@keyframes blinkTextCursor {
+  from {
+    border-right-color: rgba(255, 255, 255, 0.75);
+  }
+  to {
+    border-right-color: transparent;
+  }
+}
+.dnt-sign-img {
+  position: absolute;
+  bottom: 5px;
+  width: 100px;
+  height: 130px;
+  right: 15px;
+  border-radius: 1rem 0 0 0;
+}
+.vac-user-det {
+  margin-left: 2rem;
+}

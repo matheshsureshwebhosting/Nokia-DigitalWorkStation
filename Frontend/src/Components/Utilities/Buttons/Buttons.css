@@ -1,0 +1,114 @@
+.title-button {
+  color: white;
+  font-size: 1.5rem;
+  padding: 0.5rem 2rem;
+  text-align: center;
+  font-family: Arial, Regular;
+  border-radius: 15px;
+  background-image: linear-gradient(
+    to right bottom,
+    #1c6cae,
+    #0c69ba,
+    #1265c5,
+    #295fce,
+    #4258d5
+  );
+  width: max-content;
+}
+.submit-button {
+  color: white;
+  position: relative;
+  background: transparent linear-gradient(104deg, #3f67ac 0%, #649dff 100%) 0%
+    0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px #00000029;
+  border-radius: 5px;
+  opacity: 1;
+  width: 200px;
+  display: flex;
+  padding-bottom: 10px !important;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 53px;
+  font-size: 1.5rem !important;
+  z-index: 5;
+  cursor: pointer;
+}
+.submit-icon {
+  font-size: 32px;
+  position: absolute;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  left: 50%;
+  top: 10px;
+  transition: left 0.5s ease;
+}
+.submit-icon-active {
+  font-size: 32px;
+  margin-left: 5px;
+  position: absolute;
+  left: 75%;
+  transition: left 0.5s;
+}
+.sub-active {
+  display: block;
+  font-size: 1.4rem;
+  animation: fade 0.5s;
+  z-index: 0;
+}
+.sub-hidden {
+  display: none;
+  z-index: 0;
+}
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-moz-keyframes glowing {
+  0% {
+    background-color: #1c6cae;
+    -moz-box-shadow: 0 0 3px #1c6cae;
+  }
+  50% {
+    background-color: #4258d5;
+    -moz-box-shadow: 0 0 40px #4258d5;
+  }
+  100% {
+    background-color: #1c6cae;
+    -moz-box-shadow: 0 0 3px #1c6cae;
+  }
+}
+
+@-o-keyframes glowing {
+  0% {
+    background-color: #1c6cae;
+    box-shadow: 0 0 3px #1c6cae;
+  }
+  50% {
+    background-color: #4258d5;
+    box-shadow: 0 0 40px #4258d5;
+  }
+  100% {
+    background-color: #1c6cae;
+    box-shadow: 0 0 3px #1c6cae;
+  }
+}
+
+@keyframes glowing {
+  0% {
+    background-color: #1c6cae;
+    box-shadow: 0 0 3px #1c6cae;
+  }
+  50% {
+    background-color: #4258d5;
+    box-shadow: 0 0 40px #4258d5;
+  }
+  100% {
+    background-color: #1c6cae;
+    box-shadow: 0 0 3px #1c6cae;
+  }
+}

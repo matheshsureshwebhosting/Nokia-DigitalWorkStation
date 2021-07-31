@@ -1,0 +1,236 @@
+.thermometer {
+  position: relative;
+  width: 70px;
+  margin: 5% auto;
+  /* position: absolute;
+  right: 70px; */
+  height: 330px;
+  /* bottom: 20%; */
+  user-select: none;
+}
+#far {
+  border: 4px solid black;
+  height: 400px;
+}
+.tempselect {
+  width: 50px;
+  right: 25%;
+  top: 10%;
+}
+#cel {
+  border: 4px solid black;
+  height: 400px;
+}
+.tempselbtn {
+  height: 20px;
+  width: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.158);
+  font-size: 12px;
+  transition: transform 0.5s;
+  transform: scale(1);
+}
+.tempselbtn:hover {
+  transform: scale(1.25);
+  background-color: yellow;
+  color: #000046;
+}
+.stem {
+  width: 40px;
+  height: 250px;
+  position: relative;
+  left: 23px;
+  z-index: 1;
+  border-radius: 50px 50px 0 0;
+  border-left: 4px solid black;
+  border-top: 4px solid black;
+  border-right: 4px solid black;
+  animation-name: stem;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+.solder-card {
+  border-radius: 40px;
+  background: linear-gradient(315deg, #e6e6e6, #ffffff);
+  box-shadow: -5px -5px 10px #cccccc, 5px 5px 10px #cecece;
+}
+#marks {
+  width: 20px;
+  height: 100px;
+  position: relative;
+  bottom: 230px;
+  left: 45px;
+  z-index: 40;
+}
+#line {
+  line-height: 1rem;
+}
+
+#merc-stem {
+  width: 20px;
+  height: 85px;
+
+  position: relative;
+  bottom: 175px;
+  left: 25px;
+}
+#mercury {
+  width: 32px;
+  left: 2px;
+  height: 25px;
+  position: relative;
+  bottom: -82%;
+  z-index: 20;
+  background-color: #dd2c00;
+  animation-name: bulb;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  transition: all 2s;
+}
+
+#bulb {
+  position: relative;
+  /*   overflow: hidden; */
+  bottom: 190px;
+  z-index: 10;
+  width: 90px;
+  height: 90px;
+  background-color: #dd2c00;
+  border-radius: 50px;
+  border: 4px solid black;
+  animation-name: bulb;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+#one {
+  width: 400px;
+  animation-name: one;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#two {
+  width: 100px;
+  animation-name: two;
+  animation-duration: 2s;
+  animation-direction: alternate;
+}
+
+@media only screen and (max-width: 600px) {
+  #main {
+    height: 600px;
+    overflow: hidden;
+  }
+}
+.selected-temp-inp {
+  width: 100px;
+  text-align: center;
+  height: max-content;
+}
+.degree {
+  position: absolute;
+  top: 125px;
+  left: 80px;
+  font-weight: bolder;
+  font-size: 2rem;
+  color: white;
+}
+.btn-grad {
+  letter-spacing: 1.5px;
+  background-image: linear-gradient(
+    to right,
+    #000046 0%,
+    #1cb5e0 51%,
+    #000046 100%
+  );
+}
+.btn-grad {
+  position: absolute;
+  bottom: 00%;
+  right: 20%;
+  margin: 10px;
+  padding: 15px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  display: block;
+  border: none;
+}
+
+.btn-grad:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+.soldering-submit-btn {
+  font-size: 1.25rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 5rem;
+  background-color: #000080;
+  padding: 0.5rem 1rem;
+  width: 40%;
+}
+
+.tempcounter::after {
+  content: 'Adjust Your Attained Temperature value';
+  font-family: roboto;
+  font-weight: 500;
+  width: 120px;
+  text-align: center;
+  padding: 1rem;
+  font-size: 1rem;
+  position: absolute;
+  right: 10px;
+  bottom: 75px;
+  border: 1px solid black;
+  background-color: white;
+  border-radius: 1rem;
+}
+/* -----------KEY FRAMES---------- */
+@keyframes bulb {
+  from {
+    background-color: #a53215;
+  }
+  to {
+    background-color: #ff0000;
+  }
+}
+.testing-user-detail {
+  position: absolute;
+  right: 5%;
+  top: 2%;
+}
+.solder-radiobtn {
+  width: 15px !important;
+  position: relative !important;
+  top: -5px !important;
+}
+.solder-card-title {
+  font: 1.5em sans-serif;
+}
+@media screen and (min-width: 1200px) and (max-width: 1400px) {
+  .stem {
+    height: 200px;
+  }
+  #line {
+    line-height: 0.75rem;
+  }
+  #marks {
+    bottom: 175px;
+  }
+  .tempcounter::after {
+    width: 85px;
+    font-size: 12px;
+    padding: 10px;
+    right: 0;
+  }
+}

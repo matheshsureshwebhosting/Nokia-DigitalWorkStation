@@ -1,0 +1,65 @@
+.wrapper {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  transform: rotate(90deg);
+  background-color: transparent;
+  border: 1px solid white;
+}
+.wrapper_circle {
+  width: 80%;
+  height: 80%;
+  z-index: 5;
+  border-radius: 50%;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  background: transparent linear-gradient(180deg, #e6eaf2 0%, #ced2d9 100%) 0%
+    0% no-repeat padding-box;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%) rotate(-90deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  color: #124191;
+  font-weight: 600;
+  border: 1px solid white;
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
+.sector {
+  position: absolute;
+  transform-origin: 100% 100%;
+  width: 100%;
+  height: 100%;
+  left: 50%;
+  top: 50%;
+  border: 1px solid white;
+  margin-top: -100%;
+  margin-left: -100%;
+}
+.step_title {
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  text-align: center;
+}
+.step_tag {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 5px 0;
+  text-align: center;
+}
+.progress_section {
+  position: absolute;
+  right: 1%;
+  top: 2%;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}

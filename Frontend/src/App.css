@@ -1,0 +1,26 @@
+.h-100vh {
+  height: 100vh;
+}
+.h-20px {
+  height: 28px;
+}
+.input-label {
+  font-weight: 500;
+  font-size: 1em;
+  color: black;
+}
+.glassCard {
+  background: rgba(255, 255, 255, 0.185);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.flcc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}

@@ -1,0 +1,122 @@
+@import '~slick-carousel/slick/slick.css';
+@import '~slick-carousel/slick/slick-theme.css';
+
+/* .App {
+  width: 50%;
+  margin: 10rem auto;
+  height: 570px;
+} */
+
+.slider-custom {
+  animation-name: slideindown;
+  margin: 5rem;
+  animation-duration: 4s;
+}
+.heading {
+  letter-spacing: 0.05rem;
+  padding-top: 0px;
+  z-index: 1;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  border-radius: 4rem;
+  margin: 50px 0;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4.5px);
+  -webkit-backdrop-filter: blur(4.5px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.animation {
+  animation-name: slideindown;
+  animation-duration: 1s;
+}
+
+@keyframes slideindown {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.slide {
+  transform: scale(0.15);
+  transition: transform 1s;
+  opacity: 0.5;
+}
+
+.activeSlide {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.button-position {
+  padding-top: 20px;
+}
+
+.Button-pad:hover {
+  background-color: white;
+  border-color: #124191;
+  color: #124191;
+  text-decoration: none;
+  color: white;
+}
+
+.Button-font {
+  text-decoration: none;
+  color: white;
+}
+
+.Button-font:hover {
+  text-decoration: none;
+  color: #124191;
+}
+
+.arrow {
+  background-color: #fff;
+  position: absolute;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.arrow svg {
+  transition: color 300ms;
+}
+
+.arrow svg:hover {
+  color: #68a9ff;
+}
+
+.next {
+  right: 0%;
+  font-size: 2rem;
+  background-color: transparent;
+  top: 50%;
+}
+
+.prev {
+  left: 0%;
+  top: 50%;
+  font-size: 2rem;
+  background-color: transparent;
+}
+
+.inactive {
+  filter: grayscale(1);
+}
+.bg-slider {
+  background-attachment: fixed;
+  background-position: 75% 35%;
+  overflow-y: hidden;
+}

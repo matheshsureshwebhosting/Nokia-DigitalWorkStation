@@ -1,0 +1,42 @@
+.checked_steps {
+  position: absolute;
+  right: 33px;
+  font-size: 27px;
+  top: 15px;
+  color: white;
+  background-color: green;
+  width: 43px;
+  border-radius: 50px;
+  height: 43px;
+  padding-top: 1px;
+}
+.notchecked_steps {
+  position: absolute;
+  right: 33px;
+  font-size: 27px;
+  top: 15px;
+  color: white;
+  background-color: orange !important;
+  width: 43px;
+  border-radius: 50px;
+  height: 43px;
+  padding-top: 1px;
+}
+.vacuum-grid-tag {
+  position: absolute;
+  color: white;
+  bottom: 10px;
+  width: 310px;
+  word-wrap: normal;
+  padding: 0 20px;
+  font-weight: 500;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+.vacuum-menu-grid {
+  height: 250px !important;
+  width: 300px !important;
+}
+.hide-checked {
+  display: none;
+}
