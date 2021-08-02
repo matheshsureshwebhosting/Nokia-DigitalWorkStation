@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { Component } from 'react'
 // import { Table } from 'reactstrap'
 import { Table } from 'react-bootstrap'
+import Chart from "react-google-charts";
 
 export default class OtaTable extends Component {
     constructor(props) {
@@ -9,7 +10,8 @@ export default class OtaTable extends Component {
         this.state = {
             ota: null,
             from: null,
-            to: null
+            to: null,
+            chart:[]
         }
     }
     componentDidMount = () => {
@@ -18,6 +20,7 @@ export default class OtaTable extends Component {
                 ota: res.data
             })
         })
+        this.drawChart()
     }
     shiftfilter = async (e) => {
         const shift = e.target.value
@@ -88,14 +91,39 @@ export default class OtaTable extends Component {
             })
         }
     }
+    
+    drawChart = async () => {
+        const drawChart = await axios.get(`${process.env.REACT_APP_SERVER_ORIGIN}/ota/tempeview`).then((res) => { return res.data })
+        if (drawChart) {          
+          this.setState({chart:drawChart})
+        }
+
+    }
     render() {
-        const { ota } = this.state
-        console.log(ota)
+        const { ota,chart } = this.state
+        
         return (
             <>
                 <div className='p-3 container-fluid'>
                     <h3 className='text-center mb-4' style={{ marginBottom: "10px !important" }}>Testers Checklist OTA</h3>
+                    <Chart
+                        width={'500px'}
+                        height={'300px'}
+                        chartType="Bar"
+                        loader={<div>Loading Chart</div>}
+                        data={chart}
+                        options={{
+                            // Material design options
+                            chart: {
+                                title: 'OTA Complaince Report',
+                                subtitle: 'Datewise / Shiftwise',
 
+                            },
+                            colors: ['#2b78e3', '#ff9326', 'grey'],
+                        }}
+                        // For tests
+                        rootProps={{ 'data-testid': '2' }}
+                    />
                     <div className='d-flex justify-content-between my-2'>
                         <div className="d-flex">
                             <div className="pt-1">

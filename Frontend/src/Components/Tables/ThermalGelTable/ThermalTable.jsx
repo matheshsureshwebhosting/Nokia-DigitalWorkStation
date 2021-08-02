@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { Component } from 'react'
 // import { Table } from 'reactstrap'
 import { Table } from 'react-bootstrap'
+import Chart from "react-google-charts";
 
 export default class ThermalTable extends Component {
     constructor(props) {
@@ -94,7 +95,31 @@ export default class ThermalTable extends Component {
             <>
                 <div className='p-3 container-fluid'>
                     <h3 className='text-center mb-4' style={{ marginBottom: "10px !important" }}>Thermal Checklist </h3>
+                    <Chart
+                        width={'500px'}
+                        height={'300px'}
+                        chartType="Bar"
+                        loader={<div>Loading Chart</div>}
+                        data={[
+                            ['Day', 'Total Points', 'No OK Points', 'No NOK Points'],
+                            ['28/07/2021', 22, 15, 7],
+                            ['28/07/2021', 32, 27, 5],
+                            ['28/07/2021', 19, 15, 4],
+                            ['28/07/2021', 34, 30, 4],
+                            ['28/07/2021', 32, 25, 7],
+                        ]}
+                        options={{
+                            // Material design options
+                            chart: {
+                                title: 'Thermal Complaince Report',
+                                subtitle: 'Datewise / Shiftwise',
 
+                            },
+                            colors: ['#2b78e3', '#ff9326', 'grey'],
+                        }}
+                        // For tests
+                        rootProps={{ 'data-testid': '2' }}
+                    />
                     <div className='d-flex justify-content-between my-2'>
                         <div className="d-flex">
                             <div className="pt-1">

@@ -1,6 +1,6 @@
 const router = require("express").Router()
 const db = require("../database/mySql")
-
+const moment=require("moment")
 const fs = require("fs")
 const util = require("util")
 const removeFile = util.promisify(fs.unlink)
@@ -16,7 +16,8 @@ router.get("/", (req, res) => {
 })
 
 router.post("/send", (req, res) => {
-    const { date, shift, machine_Sl_No, checked_by,pressure_guage_value, process1_result, process2_result, process3_result, process4_result, process5_result, process6_result, process7_result, process8_result, process9_result, process1_time, process2_time, process3_time, process4_time, process5_time, process6_time, process7_time, process8_time, process9_time, status, avg, statuslists } = req.body
+    const {  shift, machine_Sl_No, checked_by,pressure_guage_value, process1_result, process2_result, process3_result, process4_result, process5_result, process6_result, process7_result, process8_result, process9_result, process1_time, process2_time, process3_time, process4_time, process5_time, process6_time, process7_time, process8_time, process9_time, status, avg, statuslists } = req.body
+    var date = moment().format("YYYY-MM-DD")
     var sql = `INSERT INTO vaccumetable (date,shift,machine_Sl_No,checked_by,pressure_guage_value, process1_result, process2_result, process3_result, process4_result, process5_result, process6_result, process7_result, process8_result, process9_result,process1_time, process2_time, process3_time, process4_time, process5_time, process6_time, process7_time, process8_time, process9_time,description,status,average,statuslists) VALUES ('${date}','${shift}','${machine_Sl_No}','${checked_by}','${pressure_guage_value}','${process1_result}','${process2_result}','${process3_result}','${process4_result}','${process5_result}','${process6_result}','${process7_result}','${process8_result}','${process9_result}','${process1_time}','${process2_time}','${process3_time}','${process4_time}','${process5_time}','${process6_time}','${process7_time}','${process8_time}','${process9_time}','Not Provided','${status}','${avg}','${statuslists}')`;
     db.query(sql, function (err, result) {
         if (err) {
@@ -109,6 +110,29 @@ router.get("/export", async (req, res) => {
         })
     res.send(url.url)
     setTimeout(async () => { await removeFile(`${url.filepath}`) }, 2000)
+})
+
+router.get("/tempeview", async (req, res) => {    
+    var tempeview = new Promise((resolve, reject) => {
+        const daterange11 = `SELECT * FROM vaccumetable`
+        db.query(daterange11, function (err, result, fields) {
+            if (err) {
+                return resolve(false)
+            } else {
+                return resolve(result)
+            }
+        });
+    })
+    var tempeviews=await tempeview
+    var chartData=[['Day', 'Total Points', 'No OK Points', 'No NOK Points']]
+    for(var i=0;i<tempeviews.length;i++){
+        var allaverage=tempeviews[i].average
+        var nokp=allaverage.split("/")[0]
+        var okp=Number(9)-Number(nokp)
+        chartData.push([tempeviews[i].date,9,okp,Number(nokp)])
+    }
+    return res.send(chartData)
+
 })
 
 router.get("/*", (req, res) => {

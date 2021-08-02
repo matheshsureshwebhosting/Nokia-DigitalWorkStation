@@ -1,12 +1,13 @@
 const router = require("express").Router()
 const db = require("../database/mySql")
-
+const moment=require("moment")
 const fs = require("fs")
 const util = require("util")
 const removeFile = util.promisify(fs.unlink)
 
 router.post("/send", (req, res) => {
-    const { date, shift, operator_name, uwa1, uwa2, uwa3, uwa4, uwa5, uwa6, uwa7, uwa8, uwa9, uwa10, uwatime1, uwatime2, uwatime3, uwatime4, uwatime5, uwatime6, uwatime7, uwatime8, uwatime9, uwatime10, description, status, avg, statuslists } = req.body
+    const {  shift, operator_name, uwa1, uwa2, uwa3, uwa4, uwa5, uwa6, uwa7, uwa8, uwa9, uwa10, uwatime1, uwatime2, uwatime3, uwatime4, uwatime5, uwatime6, uwatime7, uwatime8, uwatime9, uwatime10, description, status, avg, statuslists } = req.body
+    var date = moment().format("YYYY-MM-DD")
     var sql = `INSERT INTO uwatable (date,machine_Sl_No,shift, checked_by, uwa1, uwa2, uwa3, uwa4, uwa5, uwa6, uwa7, uwa8,uwa9,uwa10,uwatime1,uwatime2,uwatime3,uwatime4,uwatime5,uwatime6,uwatime7,uwatime8,uwatime9,uwatime10,description,status,average,statuslists) VALUES ('${date}','Not Provide','${shift}','${operator_name}','${uwa1}','${uwa2}','${uwa3}','${uwa4}','${uwa5}','${uwa6}','${uwa7}','${uwa8}','${uwa9}','${uwa10}','${uwatime1}','${uwatime2}','${uwatime3}','${uwatime4}','${uwatime5}','${uwatime6}','${uwatime7}','${uwatime8}','${uwatime9}','${uwatime10}','${description}','${status}','${avg}','${statuslists}')`;
     db.query(sql, function (err, result) {
         if (err) {
@@ -28,6 +29,28 @@ router.get("/", (req, res) => {
     });
 })
 
+router.get("/tempeview", async (req, res) => {    
+    var tempeview = new Promise((resolve, reject) => {
+        const daterange11 = `SELECT * FROM uwatable`
+        db.query(daterange11, function (err, result, fields) {
+            if (err) {
+                return resolve(false)
+            } else {
+                return resolve(result)
+            }
+        });
+    })
+    var tempeviews=await tempeview
+    var chartData=[['Day', 'Total Points', 'No OK Points', 'No NOK Points']]
+    for(var i=0;i<tempeviews.length;i++){
+        var allaverage=tempeviews[i].average
+        var nokp=allaverage.split("/")[0]
+        var okp=Number(10)-Number(nokp)
+        chartData.push([tempeviews[i].date,9,okp,Number(nokp)])
+    }
+    return res.send(chartData)
+
+})
 
 router.post("/datefilter", (req, res) => {
     const { from, to } = req.body

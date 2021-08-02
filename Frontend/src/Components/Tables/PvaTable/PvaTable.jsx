@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { Component } from 'react'
 // import { Table } from 'reactstrap'
 import { Table } from 'react-bootstrap'
+import Chart from "react-google-charts";
 
 export default class PvaTable extends Component {
     constructor(props) {
@@ -9,7 +10,8 @@ export default class PvaTable extends Component {
         this.state = {
             pva: null,
             from: null,
-            to: null
+            to: null,
+            chart:[]
         }
     }
     componentDidMount = () => {
@@ -18,6 +20,7 @@ export default class PvaTable extends Component {
                 pva: res.data
             })
         })
+        this.drawChart()
     }
     shiftfilter = async (e) => {
         const shift = e.target.value
@@ -25,7 +28,7 @@ export default class PvaTable extends Component {
             return res.data
         })
         if (shift !== "none") {
-            const filtershift = await shiftdata.filter((shifts, index) => { return shifts.shift === shift })            
+            const filtershift = await shiftdata.filter((shifts, index) => { return shifts.shift === shift })
             this.setState({
                 pva: filtershift
             })
@@ -73,13 +76,13 @@ export default class PvaTable extends Component {
         window.open(exportpva)
     }
 
-    statusfilter=async(e)=>{
+    statusfilter = async (e) => {
         const status = e.target.value
         const statusdata = await axios.get(`${process.env.REACT_APP_SERVER_ORIGIN}/pva`).then((res) => {
             return res.data
         })
         if (status !== "none") {
-            const filterstatus = await statusdata.filter((statuss, index) => { return statuss.status === status })        
+            const filterstatus = await statusdata.filter((statuss, index) => { return statuss.status === status })
             this.setState({
                 pva: filterstatus
             })
@@ -89,14 +92,39 @@ export default class PvaTable extends Component {
             })
         }
     }
+    drawChart = async () => {
+        const drawChart = await axios.get(`${process.env.REACT_APP_SERVER_ORIGIN}/ota/tempeview`).then((res) => { return res.data })
+        if (drawChart) {          
+          this.setState({chart:drawChart})
+        }
+
+    }
 
     render() {
-        const { pva } = this.state        
+        const { pva,chart } = this.state
+        
         return (
             <>
                 <div className='p-3 container-fluid'>
                     <h3 className='text-center mb-4' style={{ marginBottom: "10px !important" }}>Testers Checklist PVA</h3>
+                    <Chart
+                        width={'500px'}
+                        height={'300px'}
+                        chartType="Bar"
+                        loader={<div>Loading Chart</div>}
+                        data={chart}
+                        options={{
+                            // Material design options
+                            chart: {
+                                title: 'PVA Complaince Report',
+                                subtitle: 'Datewise / Shiftwise',
 
+                            },
+                            colors: ['#2b78e3', '#ff9326', 'grey'],
+                        }}
+                        // For tests
+                        rootProps={{ 'data-testid': '2' }}
+                    />
                     <div className='d-flex justify-content-between my-2'>
                         <div className="d-flex">
                             <div className="pt-1">
@@ -118,114 +146,114 @@ export default class PvaTable extends Component {
                                 <option value="none">Filter By Shift</option>
                                 <option value="Shift A">Shift A</option>
                                 <option value="Shift B" >Shift B</option>
-                                <option value="Shift C">Shift C</option>                                
+                                <option value="Shift C">Shift C</option>
                             </select>
                             <select className="form-select mr-1" onChange={e => this.statusfilter(e)}>
                                 <option value="none">Filter By Status</option>
                                 <option value="Complete" >Complete</option>
-                                <option value="In Complete">In Complete</option>                                
+                                <option value="In Complete">In Complete</option>
                             </select>
                         </div>
                     </div>
-                 
-                    <Table striped bordered hover size="sm" responsive="sm">
-                            <thead>
-                                <tr>
-                                    <th className="tg-54sw text-center pb-4" rowSpan="3">Date</th>
-                                    <th className="tg-54sw text-center pb-4" rowSpan="3">Shift</th>
-                                    <th className="tg-54sw text-center pb-4" rowSpan="3">Machine Serial No</th>
-                                    <th className="tg-54sw text-center pb-4" rowSpan="3">Pressure Guage Value</th>
-                                    <th className="tg-54sw text-center pb-4" rowSpan="3">Checked By</th>
-                                    <th className="tg-54sw text-center " colSpan="26">Status</th>
-                                    <th className="tg-wa1i text-center pb-4" rowSpan="3">Remarks</th>
-                                    <th className="tg-wa1i text-center pb-4" rowSpan="3">Status</th>
-                                </tr>
-                                <tr>
-                                    <td className="tg-54sw text-center" colSpan="2">PVA1</td>
-                                    <td className="tg-54sw text-center" colSpan="2">PVA2</td>
-                                    <td className="tg-54sw text-center" colSpan="2">PVA3</td>
-                                    <td className="tg-54sw text-center" colSpan="2">PVA4</td>
-                                    <td className="tg-54sw text-center" colSpan="2">PVA5</td>
-                                    <td className="tg-54sw text-center" colSpan="2">PVA6</td>
-                                    <td className="tg-54sw text-center" colSpan="2">PVA7</td>
-                                    <td className="tg-2g1l text-center" colSpan="2">PVA8</td>
-                                    <td className="tg-2g1l text-center" colSpan="2">PVA9</td>
-                                    <td className="tg-2g1l text-center" colSpan="2">PVA10</td>
-                                    <td className="tg-2g1l text-center" colSpan="2">PVA11</td>
-                                    <td className="tg-2g1l text-center" colSpan="2">PVA12</td>
-                                    <td className="tg-2g1l text-center" colSpan="2">PVA13</td>
-                                </tr>
-                                <tr>
-                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
-                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
-                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
-                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
-                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
-                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
-                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
-                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
-                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
-                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
-                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
-                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
-                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
-                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
-                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
-                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
-                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
-                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
-                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
-                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
-                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
-                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
-                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
-                                    <td className="tg-54sw text-center" colSpan="1">Result</td>
-                                    <td className="tg-54sw text-center" colSpan="1">Time</td>
-                                    <td className="tg-54sw text-center" colSpan="1">Result</td> 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {  pva && pva.map((pvainfo, index) => (
-                                        <tr key={index}>
-                                            <td className="tg-za14">{pvainfo.date}</td>
-                                            <td className="tg-za14">{pvainfo.shift}</td>
-                                            <td className="tg-za14"> {pvainfo.machine_Sl_No}</td>
-                                            <td className="tg-za14"> {pvainfo.pressure_guage_value}</td>
-                                            <td className="tg-za14"> {pvainfo.checked_by}</td>                                           
-                                            <td className="tg-za14" colSpan="1">{pvainfo.pvatime1}</td>
-                                            <td className="tg-za14" colSpan="1">{pvainfo.pva1}</td>  
-                                            <td className="tg-za14" colSpan="1">{pvainfo.pvatime2}</td>                                         
-                                            <td className="tg-za14" colSpan="1">{pvainfo.pva2} </td>  
-                                            <td className="tg-za14" colSpan="1">{pvainfo.pvatime3}</td>                                        
-                                            <td className="tg-za14" colSpan="1"> {pvainfo.pva3}</td>   
-                                            <td className="tg-za14" colSpan="1">{pvainfo.pvatime4}</td>                                        
-                                            <td className="tg-za14" colSpan="1">{pvainfo.pva4} </td>   
-                                            <td className="tg-za14" colSpan="1">{pvainfo.pvatime5}</td>                                        
-                                            <td className="tg-za14" colSpan="1"> {pvainfo.pva5}</td> 
-                                            <td className="tg-za14" colSpan="1">{pvainfo.pvatime6}</td>                                        
-                                            <td className="tg-7zrl" colSpan="1">{pvainfo.pva6} </td>   
-                                            <td className="tg-za14" colSpan="1">{pvainfo.pvatime7}</td>                                       
-                                            <td className="tg-7zrl" colSpan="1">{pvainfo.pva7} </td>  
-                                            <td className="tg-za14" colSpan="1">{pvainfo.pvatime8}</td>                                        
-                                            <td className="tg-7zrl" colSpan="1">{pvainfo.pva8} </td>   
-                                            <td className="tg-za14" colSpan="1">{pvainfo.pvatime9}</td>                                       
-                                            <td className="tg-7zrl" colSpan="1">{pvainfo.pva9} </td>
-                                            <td className="tg-za14" colSpan="1">{pvainfo.pvatime10}</td>                                       
-                                            <td className="tg-7zrl" colSpan="1">{pvainfo.pva10} </td>
-                                            <td className="tg-za14" colSpan="1">{pvainfo.pvatime11}</td>                                       
-                                            <td className="tg-7zrl" colSpan="1">{pvainfo.pva11} </td>
-                                            <td className="tg-za14" colSpan="1">{pvainfo.pvatime12}</td>                                       
-                                            <td className="tg-7zrl" colSpan="1">{pvainfo.pva12} </td>
-                                            <td className="tg-za14" colSpan="1">{pvainfo.pvatime13}</td>                                       
-                                            <td className="tg-7zrl" colSpan="1">{pvainfo.pva13} </td>
-                                            <td className="tg-7zrl">{pvainfo.description}</td>
-                                            <td className="tg-7zrl">{pvainfo.status}</td>
-                                        </tr>
-                                    )) 
-                                }
 
-                            </tbody>
-                        </Table>
+                    <Table striped bordered hover size="sm" responsive="sm">
+                        <thead>
+                            <tr>
+                                <th className="tg-54sw text-center pb-4" rowSpan="3">Date</th>
+                                <th className="tg-54sw text-center pb-4" rowSpan="3">Shift</th>
+                                <th className="tg-54sw text-center pb-4" rowSpan="3">Machine Serial No</th>
+                                <th className="tg-54sw text-center pb-4" rowSpan="3">Pressure Guage Value</th>
+                                <th className="tg-54sw text-center pb-4" rowSpan="3">Checked By</th>
+                                <th className="tg-54sw text-center " colSpan="26">Status</th>
+                                <th className="tg-wa1i text-center pb-4" rowSpan="3">Remarks</th>
+                                <th className="tg-wa1i text-center pb-4" rowSpan="3">Status</th>
+                            </tr>
+                            <tr>
+                                <td className="tg-54sw text-center" colSpan="2">PVA1</td>
+                                <td className="tg-54sw text-center" colSpan="2">PVA2</td>
+                                <td className="tg-54sw text-center" colSpan="2">PVA3</td>
+                                <td className="tg-54sw text-center" colSpan="2">PVA4</td>
+                                <td className="tg-54sw text-center" colSpan="2">PVA5</td>
+                                <td className="tg-54sw text-center" colSpan="2">PVA6</td>
+                                <td className="tg-54sw text-center" colSpan="2">PVA7</td>
+                                <td className="tg-2g1l text-center" colSpan="2">PVA8</td>
+                                <td className="tg-2g1l text-center" colSpan="2">PVA9</td>
+                                <td className="tg-2g1l text-center" colSpan="2">PVA10</td>
+                                <td className="tg-2g1l text-center" colSpan="2">PVA11</td>
+                                <td className="tg-2g1l text-center" colSpan="2">PVA12</td>
+                                <td className="tg-2g1l text-center" colSpan="2">PVA13</td>
+                            </tr>
+                            <tr>
+                                <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                <td className="tg-54sw text-center" colSpan="1">Result</td>
+                                <td className="tg-54sw text-center" colSpan="1">Time</td>
+                                <td className="tg-54sw text-center" colSpan="1">Result</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {pva && pva.map((pvainfo, index) => (
+                                <tr key={index}>
+                                    <td className="tg-za14">{pvainfo.date}</td>
+                                    <td className="tg-za14">{pvainfo.shift}</td>
+                                    <td className="tg-za14"> {pvainfo.machine_Sl_No}</td>
+                                    <td className="tg-za14"> {pvainfo.pressure_guage_value}</td>
+                                    <td className="tg-za14"> {pvainfo.checked_by}</td>
+                                    <td className="tg-za14" colSpan="1">{pvainfo.pvatime1}</td>
+                                    <td className="tg-za14" colSpan="1">{pvainfo.pva1}</td>
+                                    <td className="tg-za14" colSpan="1">{pvainfo.pvatime2}</td>
+                                    <td className="tg-za14" colSpan="1">{pvainfo.pva2} </td>
+                                    <td className="tg-za14" colSpan="1">{pvainfo.pvatime3}</td>
+                                    <td className="tg-za14" colSpan="1"> {pvainfo.pva3}</td>
+                                    <td className="tg-za14" colSpan="1">{pvainfo.pvatime4}</td>
+                                    <td className="tg-za14" colSpan="1">{pvainfo.pva4} </td>
+                                    <td className="tg-za14" colSpan="1">{pvainfo.pvatime5}</td>
+                                    <td className="tg-za14" colSpan="1"> {pvainfo.pva5}</td>
+                                    <td className="tg-za14" colSpan="1">{pvainfo.pvatime6}</td>
+                                    <td className="tg-7zrl" colSpan="1">{pvainfo.pva6} </td>
+                                    <td className="tg-za14" colSpan="1">{pvainfo.pvatime7}</td>
+                                    <td className="tg-7zrl" colSpan="1">{pvainfo.pva7} </td>
+                                    <td className="tg-za14" colSpan="1">{pvainfo.pvatime8}</td>
+                                    <td className="tg-7zrl" colSpan="1">{pvainfo.pva8} </td>
+                                    <td className="tg-za14" colSpan="1">{pvainfo.pvatime9}</td>
+                                    <td className="tg-7zrl" colSpan="1">{pvainfo.pva9} </td>
+                                    <td className="tg-za14" colSpan="1">{pvainfo.pvatime10}</td>
+                                    <td className="tg-7zrl" colSpan="1">{pvainfo.pva10} </td>
+                                    <td className="tg-za14" colSpan="1">{pvainfo.pvatime11}</td>
+                                    <td className="tg-7zrl" colSpan="1">{pvainfo.pva11} </td>
+                                    <td className="tg-za14" colSpan="1">{pvainfo.pvatime12}</td>
+                                    <td className="tg-7zrl" colSpan="1">{pvainfo.pva12} </td>
+                                    <td className="tg-za14" colSpan="1">{pvainfo.pvatime13}</td>
+                                    <td className="tg-7zrl" colSpan="1">{pvainfo.pva13} </td>
+                                    <td className="tg-7zrl">{pvainfo.description}</td>
+                                    <td className="tg-7zrl">{pvainfo.status}</td>
+                                </tr>
+                            ))
+                            }
+
+                        </tbody>
+                    </Table>
                     {
                         pva !== null ? pva.length === 0 ? <div className="text-center">No data</div> : null : null
                     }

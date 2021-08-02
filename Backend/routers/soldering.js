@@ -98,14 +98,13 @@ router.post("/tempeview", async (req, res) => {
             }
         });
     })
-    var details = [], stations = [], standardtemp = [],measuredtemp=[]
+    var chartdata = [['Stations', 'Standard Temp', 'Measured']], countdata = [['Count', 'Count']]
     var tempView = await tempeview
     for (var i = 0; i < tempView.length; i++) {
-        stations.push(tempView[i].station)
-        standardtemp.push("252")
-        measuredtemp.push(tempView[i].temperature)
-    }
-    return res.send({ standardtemp: standardtemp, stations: stations,measuredtemp:measuredtemp })
+        chartdata.push([tempView[i].station, "252", tempView[i].temperature])
+    }            
+    countdata.push([date, tempView.length])       
+    return res.json({ chartdata: chartdata, countdata: countdata })
 
 })
 

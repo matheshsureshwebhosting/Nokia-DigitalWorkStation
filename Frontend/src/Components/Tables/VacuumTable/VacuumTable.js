@@ -2,7 +2,8 @@ import axios from 'axios'
 import React, { Component } from 'react'
 import { Table } from 'react-bootstrap'
 import '../css/Tables.css'
-
+import Chart from "react-google-charts";
+import moment from "moment"
 
 export default class VacuumTable extends Component {
 
@@ -11,7 +12,9 @@ export default class VacuumTable extends Component {
         this.state = {
             vaccumetable: null,
             from: null,
-            to: null
+            to: null,
+            chartdate: "",
+            chart: [],
         }
     }
     componentDidMount = () => {
@@ -20,6 +23,8 @@ export default class VacuumTable extends Component {
                 vaccumetable: res.data
             })
         })
+     
+        this.drawChart()
     }
     shiftfilter = async (e) => {
         const shift = e.target.value
@@ -91,13 +96,40 @@ export default class VacuumTable extends Component {
             })
         }
     }
+
+    drawChart = async () => {
+        const drawChart = await axios.get(`${process.env.REACT_APP_SERVER_ORIGIN}/vaccume/tempeview`).then((res) => { return res.data })
+        if (drawChart) {          
+          this.setState({chart:drawChart})
+        }
+
+    }
     render() {
-        const { vaccumetable } = this.state
+        const { vaccumetable,chart } = this.state
         return (
             <div>
                 <>
                     <div className='p-3'>
                         <h3 className='text-center mb-4'>Vacuum Lifter Maintenance</h3>
+                        {/* <div><input type="date" name="chartdate" value={chartdate} onChange={(e) => this.handleChange(e)} /></div> */}
+                        <Chart
+                            width={'500px'}
+                            height={'300px'}
+                            chartType="Bar"
+                            loader={<div>Loading Chart</div>}
+                            data={chart}
+                            options={{
+                                // Material design options
+                                chart: {
+                                    title: 'Vacuum Complaince Report',
+                                    subtitle: 'Datewise / Shiftwise',
+
+                                },
+                                colors: ['#2b78e3', '#ff9326', 'grey'],
+                            }}
+                            // For tests
+                            rootProps={{ 'data-testid': '2' }}
+                        />
                         <div className="d-flex justify-content-between my-3">
                             <div className='d-flex'>
                                 <div className="mt-1">

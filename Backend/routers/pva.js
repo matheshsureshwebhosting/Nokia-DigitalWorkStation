@@ -1,12 +1,13 @@
 const router = require("express").Router()
 const db = require("../database/mySql")
-
+const moment=require("moment")
 const fs = require("fs")
 const util = require("util")
 const removeFile = util.promisify(fs.unlink)
 
 router.post("/send", (req, res) => {
-    const { date, shift, operator_name,pressure_guage_value, pva1, pva2, pva3, pva4, pva5, pva6, pva7, pva8, pva9, pva10,pva11,pva12,pva13, pvatime1, pvatime2, pvatime3, pvatime4, pvatime5, pvatime6, pvatime7, pvatime8, pvatime9, pvatime10,pvatime11,pvatime12,pvatime13, description, status, avg, statuslists } = req.body
+    const {  shift, operator_name,pressure_guage_value, pva1, pva2, pva3, pva4, pva5, pva6, pva7, pva8, pva9, pva10,pva11,pva12,pva13, pvatime1, pvatime2, pvatime3, pvatime4, pvatime5, pvatime6, pvatime7, pvatime8, pvatime9, pvatime10,pvatime11,pvatime12,pvatime13, description, status, avg, statuslists } = req.body
+    var date = moment().format("YYYY-MM-DD")
     var sql = `INSERT INTO pvatable (date,machine_Sl_No,shift, checked_by,pressure_guage_value, pva1, pva2, pva3, pva4, pva5, pva6, pva7, pva8,pva9,pva10,pva11,pva12,pva13,pvatime1,pvatime2,pvatime3,pvatime4,pvatime5,pvatime6,pvatime7,pvatime8,pvatime9,pvatime10,pvatime11,pvatime12,pvatime13,description,status,average,statuslists) VALUES ('${date}','Not Provide','${shift}','${operator_name}','${pressure_guage_value}','${pva1}','${pva2}','${pva3}','${pva4}','${pva5}','${pva6}','${pva7}','${pva8}','${pva9}','${pva10}','${pva11}','${pva12}','${pva13}','${pvatime1}','${pvatime2}','${pvatime3}','${pvatime4}','${pvatime5}','${pvatime6}','${pvatime7}','${pvatime8}','${pvatime9}','${pvatime10}','${pvatime11}','${pvatime12}','${pvatime13}','${description}','${status}','${avg}','${statuslists}')`;
     db.query(sql, function (err, result) {
         if (err) {
@@ -41,6 +42,29 @@ router.post("/datefilter", (req, res) => {
             return res.send(result)
         }
     });
+})
+
+router.get("/tempeview", async (req, res) => {    
+    var tempeview = new Promise((resolve, reject) => {
+        const daterange11 = `SELECT * FROM pvatable`
+        db.query(daterange11, function (err, result, fields) {
+            if (err) {
+                return resolve(false)
+            } else {
+                return resolve(result)
+            }
+        });
+    })
+    var tempeviews=await tempeview
+    var chartData=[['Day', 'Total Points', 'No OK Points', 'No NOK Points']]
+    for(var i=0;i<tempeviews.length;i++){
+        var allaverage=tempeviews[i].average
+        var nokp=allaverage.split("/")[0]
+        var okp=Number(10)-Number(nokp)
+        chartData.push([tempeviews[i].date,9,okp,Number(nokp)])
+    }
+    return res.send(chartData)
+
 })
 
 router.get("/export", async (req, res) => {

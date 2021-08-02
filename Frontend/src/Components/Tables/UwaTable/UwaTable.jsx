@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { Component } from 'react'
 // import { Table } from 'reactstrap'
 import { Table } from 'react-bootstrap'
+import Chart from "react-google-charts";
 
 export default class UwaTable extends Component {
     constructor(props) {
@@ -9,7 +10,8 @@ export default class UwaTable extends Component {
         this.state = {
             uwa: null,
             from: null,
-            to: null
+            to: null,
+            chart:[]
         }
     }
     componentDidMount = () => {
@@ -18,6 +20,7 @@ export default class UwaTable extends Component {
                 uwa: res.data
             })
         })
+        this.drawChart()
     }
     shiftfilter = async (e) => {
         const shift = e.target.value
@@ -89,14 +92,37 @@ export default class UwaTable extends Component {
             })
         }
     }
+    drawChart = async () => {
+        const drawChart = await axios.get(`${process.env.REACT_APP_SERVER_ORIGIN}/uwa/tempeview`).then((res) => { return res.data })
+        if (drawChart) {          
+          this.setState({chart:drawChart})
+        }
 
+    }
     render() {
-        const { uwa } = this.state
+        const { uwa,chart } = this.state
         return (
             <>
                 <div className='p-3 container-fluid'>
                     <h3 className='text-center mb-4' style={{ marginBottom: "10px !important" }}>Testers Checklist UWA</h3>
+                    <Chart
+                        width={'500px'}
+                        height={'300px'}
+                        chartType="Bar"
+                        loader={<div>Loading Chart</div>}
+                        data={chart}
+                        options={{
+                            // Material design options
+                            chart: {
+                                title: 'UWA Complaince Report',
+                                subtitle: 'Datewise / Shiftwise',
 
+                            },
+                            colors: ['#2b78e3', '#ff9326', 'grey'],
+                        }}
+                        // For tests
+                        rootProps={{ 'data-testid': '2' }}
+                    />
                     <div className='d-flex justify-content-between my-2'>
                         <div className="d-flex">
                             <div className="pt-1">

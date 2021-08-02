@@ -1,8 +1,8 @@
 import axios from 'axios'
 import React, { Component } from 'react'
 import { Table } from 'react-bootstrap'
+import Chart from "react-google-charts";
 import moment from "moment"
-import Charts from "../../../Components/chart"
 export default class SolderTable extends Component {
     constructor(props) {
         super()
@@ -11,7 +11,8 @@ export default class SolderTable extends Component {
             from: null,
             to: null,
             chartdate: "",
-            chart: null
+            sations: [],
+            counts:[]
         }
     }
     componentDidMount = () => {
@@ -103,35 +104,56 @@ export default class SolderTable extends Component {
     drawChart = async (chartDate) => {
         const drawChart = await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/soldering/tempeview`, { date: chartDate }).then((res) => { return res.data })
         if (drawChart) {
-            const { stations } = drawChart            
-            if (stations.length !== 0) {
-                this.setState({ chart: drawChart })
-            }else{
-                this.setState({ chart: null })
-            }
+           const {chartdata,countdata}=drawChart
+           this.setState({sations:chartdata,counts:countdata})
         }
 
     }
     render() {
-        const { soldering, chart, chartdate } = this.state
-
+        const { soldering, sations, counts,chartdate } = this.state        
         return (
             <>
-                <div>
-                    <div><input type="date" name="chartdate" value={chartdate} onChange={(e) => this.handleChange(e)} /></div>
-                    {
-                        chart !== null ? (
-                            <React.Fragment>
-
-                                < Charts chart={chart} />
-                            </React.Fragment>
-                        ) : null
-                    }
-
-                </div>
                 <div className='p-3 container-fluid'>
                     <h3 className='text-center mb-4' style={{ marginBottom: "10px !important" }}>Solder Tip Temperature Monitoring</h3>
+                    <div><input type="date" name="chartdate" value={chartdate} onChange={(e) => this.handleChange(e)} /></div>
+                    <div className='d-flex justify-content-between p-5'>
+                        <Chart
+                            width={'500px'}
+                            height={'300px'}
+                            chartType="Bar"
+                            loader={<div>Loading Chart</div>}
+                            data={sations}
+                            options={{
+                                // Material design options
+                                chart: {
+                                    title: 'Soldering ToolTip Testing Performance',
+                                    subtitle: 'Shiftwise',
 
+                                },
+                                colors: ['#2b78e3', '#ff9326'],
+                            }}
+                            // For tests
+                            rootProps={{ 'data-testid': '2' }}
+                        />
+                        <Chart
+                            width={'500px'}
+                            height={'300px'}
+                            chartType="Bar"
+                            loader={<div>Loading Chart</div>}
+                            data={counts}
+                            options={{
+                                // Material design options
+                                chart: {
+                                    title: 'Soldering Complaince Report',
+                                    subtitle: 'Datewise / Shiftwise',
+
+                                },
+                                colors: ['#2b78e3', '#ff9326'],
+                            }}
+                            // For tests
+                            rootProps={{ 'data-testid': '2' }}
+                        />
+                    </div>
                     <div className='d-flex justify-content-between my-2'>
                         <div className="d-flex">
                             <div className="pt-1">
