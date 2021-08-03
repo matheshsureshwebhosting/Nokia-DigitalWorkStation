@@ -51,7 +51,6 @@ router.get("/export", async (req, res) => {
                 return resolve(result)
             }
         });
-
     })
     const data = await vaccumeformdata
     var Excel = require('exceljs');
@@ -88,6 +87,7 @@ router.get("/export", async (req, res) => {
 
 router.post("/tempeview", async (req, res) => {
     const { date } = req.body
+    
     var tempeview = new Promise((resolve, reject) => {
         const daterange11 = `SELECT * FROM solderingtable WHERE date=?`
         db.query(daterange11, [date], function (err, result, fields) {
@@ -101,7 +101,7 @@ router.post("/tempeview", async (req, res) => {
     var chartdata = [['Stations', 'Standard Temp', 'Measured']], countdata = [['Count', 'Count']]
     var tempView = await tempeview
     for (var i = 0; i < tempView.length; i++) {
-        chartdata.push([tempView[i].station, "252", tempView[i].temperature])
+        chartdata.push([tempView[i].station, tempView[i].defaultTemp, tempView[i].temperature])
     }            
     countdata.push([date, tempView.length])       
     return res.json({ chartdata: chartdata, countdata: countdata })
