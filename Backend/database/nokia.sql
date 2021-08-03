@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 02, 2021 at 12:56 PM
+-- Generation Time: Aug 03, 2021 at 10:51 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.7
 
@@ -60,15 +60,6 @@ CREATE TABLE `otatable` (
   `applieddate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `otatable`
---
-
-INSERT INTO `otatable` (`id`, `date`, `machine_Sl_No`, `shift`, `checked_by`, `ota1`, `ota2`, `ota3`, `ota4`, `ota5`, `ota6`, `ota7`, `ota8`, `ota9`, `ota10`, `Otatime1`, `Otatime2`, `Otatime3`, `Otatime4`, `Otatime5`, `Otatime6`, `Otatime7`, `Otatime8`, `Otatime9`, `Otatime10`, `description`, `status`, `average`, `statuslists`, `applieddate`) VALUES
-(1, '2021-06-28 13:16:20', 'Not Provide', 'Shift A', 'john', 'Yes', 'Yes', 'No', 'Yes', 'No', 'Yes', 'No', 'Yes', 'No', 'Yes', '1', '1', '1', '1', '1', '0', '1', '0', '1', '1', 'Not Provided', 'In Complete', '6/10', 'Ota3,Ota5,Ota7,Ota9', '2021-08-02 10:55:00'),
-(2, '2021-06-28 16:11:35', 'Not Provide', 'Shift B', 'ddd', 'Yes', 'Yes', 'Yes', 'Yes', 'No', 'No', 'Yes', 'Yes', 'No', 'No', '2', '3', '0', '0', '0', '1', '1', '0', '0', '1', 'Not Provided', 'In Complete', '6/10', 'Ota5,Ota6,Ota9,ota10', '2021-08-02 10:55:00'),
-(3, '2021-06-28 16:13:44', 'Not Provide', 'Shift B', 'dd', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', '0', '0', '1', '0', '0', '0', '0', '0', '0', '1', 'Not Provided', 'Complete', '10 / 10', '', '2021-08-02 10:55:00');
-
 -- --------------------------------------------------------
 
 --
@@ -115,15 +106,6 @@ CREATE TABLE `pvatable` (
   `applieddate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `pvatable`
---
-
-INSERT INTO `pvatable` (`id`, `date`, `machine_Sl_No`, `shift`, `checked_by`, `pressure_guage_value`, `pva1`, `pva2`, `pva3`, `pva4`, `pva5`, `pva6`, `pva7`, `pva8`, `pva9`, `pva10`, `pva11`, `pva12`, `pva13`, `pvatime1`, `pvatime2`, `pvatime3`, `pvatime4`, `pvatime5`, `pvatime6`, `pvatime7`, `pvatime8`, `pvatime9`, `pvatime10`, `pvatime11`, `pvatime12`, `pvatime13`, `description`, `status`, `average`, `statuslists`, `applieddate`) VALUES
-(1, '2021-06-28 17:7:41', 'Not Provide', 'Shift B', 'john', '22', 'Yes', 'Yes', 'No', 'No', 'Yes', 'Yes', 'No', 'Yes', 'Yes', 'No', 'No', 'Yes', 'Yes', '1', '0', '0', '0', '0', '0', '2', '1', '0', '0', '0', '0', '0', 'Not Provided', 'In Complete', '5/10', 'pva3,pva4,pva7,pva10,pva11', '2021-08-02 10:55:18'),
-(2, '2021-07-15 12:26:30', 'Not Provide', 'Shift A', 'john', 'undefined', 'Yes', 'Yes', 'No', 'Yes', 'Yes', 'No', 'Yes', 'No', 'No', 'Yes', 'No', 'Yes', 'No', '2', '1', '0', '0', '0', '0', '4', '1', '0', '1', '1', '1', '1', 'Not Provided', 'In Complete', '4/10', 'pva3,pva6,pva8,pva9,pva11,pva13', '2021-08-02 10:55:18'),
-(3, '2021-07-15 12:29:30', 'Not Provide', 'Shift A', 'john', '100', 'Yes', 'Yes', 'Yes', 'No', 'No', 'Yes', 'No', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', '1', '0', '0', '0', '0', '0', '4', '0', '0', '0', '0', '0', '0', 'Not Provided', 'In Complete', '7/10', 'pva4,pva5,pva7', '2021-08-02 10:55:18');
-
 -- --------------------------------------------------------
 
 --
@@ -135,6 +117,7 @@ CREATE TABLE `solderingtable` (
   `date` varchar(255) DEFAULT NULL,
   `time` varchar(255) DEFAULT NULL,
   `shift` varchar(255) DEFAULT NULL,
+  `defaultTemp` int(11) NOT NULL,
   `machine_Sl_No` varchar(255) DEFAULT NULL,
   `station` varchar(255) DEFAULT NULL,
   `catridge_used` varchar(255) DEFAULT NULL,
@@ -144,16 +127,6 @@ CREATE TABLE `solderingtable` (
   `status` varchar(255) DEFAULT NULL,
   `applieddate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `solderingtable`
---
-
-INSERT INTO `solderingtable` (`id`, `date`, `time`, `shift`, `machine_Sl_No`, `station`, `catridge_used`, `temperature`, `checked_by`, `description`, `status`, `applieddate`) VALUES
-(1, '2021-07-30', '24', 'Shift B', 'not provide', 'station1', 'STTC 160 / 398°c', '398', 'k', 'Not Provided', 'Complete', '2021-08-02 10:55:34'),
-(2, '2021-07-30', '26', 'Shift B', 'not provide', 'station2', 'STTC 804L / 425°c', '425', 't', 'Not Provided', 'Complete', '2021-08-02 10:55:34'),
-(3, '2021-07-30', '24', 'Shift B', 'not provide', 'station1', 'STTC 160 / 398°c', '400', 'k', 'Not Provided', 'Complete', '2021-08-02 10:55:34'),
-(4, '2021-07-31', '26', 'Shift B', 'not provide', 'station2', 'STTC 804L / 425°c', '425', 't', 'Not Provided', 'Complete', '2021-08-02 10:55:34');
 
 -- --------------------------------------------------------
 
@@ -262,13 +235,6 @@ CREATE TABLE `uwatable` (
   `applieddate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `uwatable`
---
-
-INSERT INTO `uwatable` (`id`, `date`, `machine_Sl_No`, `shift`, `checked_by`, `uwa1`, `uwa2`, `uwa3`, `uwa4`, `uwa5`, `uwa6`, `uwa7`, `uwa8`, `uwa9`, `uwa10`, `uwatime1`, `uwatime2`, `uwatime3`, `uwatime4`, `uwatime5`, `uwatime6`, `uwatime7`, `uwatime8`, `uwatime9`, `uwatime10`, `description`, `status`, `average`, `statuslists`, `applieddate`) VALUES
-(0, '2021-06-28 13:17:51', 'Not Provide', 'Shift A', 'john', 'Yes', 'No', 'Yes', 'No', 'Yes', 'No', 'Yes', 'No', 'Yes', 'No', '1', '0', '0', '1', '0', '1', '0', '1', '0', '0', 'Not Provided', 'In Complete', '5/10', 'Uwa2,Uwa4,Uwa6,Uwa8,uwa10', '2021-08-02 10:55:49');
-
 -- --------------------------------------------------------
 
 --
@@ -306,15 +272,6 @@ CREATE TABLE `vaccumetable` (
   `statuslists` varchar(255) DEFAULT NULL,
   `applieddate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `vaccumetable`
---
-
-INSERT INTO `vaccumetable` (`id`, `date`, `shift`, `machine_Sl_No`, `checked_by`, `pressure_guage_value`, `process1_result`, `process2_result`, `process3_result`, `process4_result`, `process5_result`, `process6_result`, `process7_result`, `process8_result`, `process9_result`, `process1_time`, `process2_time`, `process3_time`, `process4_time`, `process5_time`, `process6_time`, `process7_time`, `process8_time`, `process9_time`, `description`, `status`, `average`, `statuslists`, `applieddate`) VALUES
-(1, '2021-06-28 13:11:23', 'Shift A', 'dhfgh', 'john', '333', 'Yes', 'No', 'Yes', 'No', 'Yes', 'Yes', 'Yes', 'Yes', 'No', '1', '1', '0', '1', '0', '2', '0', '0', '4', 'Not Provided', 'In Complete', '6/9', 'step2,step4,step9', '2021-08-02 10:56:10'),
-(2, '2021-07-14 17:15:36', 'Shift B', 'fff', 'fff', '333', 'No', 'No', 'No', 'No', 'No', 'No', 'No', 'No', 'No', '11', '24', '13', '10', '9', '8', '9', '8', '11', 'undefined', 'In Complete', '0/9', 'step1,step2,step3,step4,step5,step6,step7,step8,step9', '2021-08-02 10:56:10'),
-(3, '2021-07-15 10:56:40', 'Shift A', 'ghf4f4', 'john', '150', 'No', 'Yes', 'No', 'No', 'Yes', 'No', 'No', 'No', 'Yes', '3', '2', '2', '4', '2', '2', '4', '3', '17', 'undefined', 'In Complete', '3/9', 'step1,step3,step4,step6,step7,step8', '2021-08-02 10:56:10');
 
 --
 -- Indexes for dumped tables
@@ -364,19 +321,19 @@ ALTER TABLE `vaccumetable`
 -- AUTO_INCREMENT for table `otatable`
 --
 ALTER TABLE `otatable`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pvatable`
 --
 ALTER TABLE `pvatable`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `solderingtable`
 --
 ALTER TABLE `solderingtable`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `thermaltable`
@@ -394,7 +351,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `vaccumetable`
 --
 ALTER TABLE `vaccumetable`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
