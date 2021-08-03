@@ -70,7 +70,7 @@ function Ota(props) {
                         testing: `OTA Testing ${otaform.Station} ${otaform.shift} ${otaform.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    ////await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -142,7 +142,7 @@ function Ota2() {
                         testing: `OTA Testing ${otaform.Station} ${otaform.shift} ${otaform.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    ////await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -215,7 +215,7 @@ function Ota3() {
                         testing: `OTA Testing ${otaform.Station} ${otaform.shift} ${otaform.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    ////await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -287,7 +287,7 @@ function Ota4() {
                         testing: `OTA Testing ${otaform.Station} ${otaform.shift} ${otaform.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    ////await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -361,7 +361,7 @@ function Ota5() {
                         testing: `OTA Testing ${otaform.Station} ${otaform.shift} ${otaform.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    ////await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -433,7 +433,7 @@ function Ota6() {
                         testing: `OTA Testing ${otaform.Station} ${otaform.shift} ${otaform.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    ////await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -507,7 +507,7 @@ function Ota7() {
                         testing: `OTA Testing ${otaform.Station} ${otaform.shift} ${otaform.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -582,7 +582,7 @@ function Ota8() {
                         testing: `OTA Testing ${otaform.Station} ${otaform.shift} ${otaform.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -655,7 +655,7 @@ function Ota9() {
                         testing: `OTA Testing ${otaform.Station} ${otaform.shift} ${otaform.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -715,7 +715,7 @@ function Ota10() {
                 testing: `OTA Testing ${otaform.Station} ${otaform.shift} ${otaform.date}`,
                 failurestep: form
             }                                     
-            await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+            //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
             dispatch(otaActions.step10_status('no'))
         }
         SweetAlert.fire({

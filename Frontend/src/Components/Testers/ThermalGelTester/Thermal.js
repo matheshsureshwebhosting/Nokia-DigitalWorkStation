@@ -88,7 +88,7 @@ export function Thermal(props) {
                             testing: `Thermal Testing ${thermalforms.Station} ${thermalforms.shift} ${thermalforms.date}`,
                             failurestep: form
                         }                                     
-                        await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                        //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                         history.push(nextPath)
                     }
                 })
@@ -165,7 +165,7 @@ export function Thermal2() {
                         testing: `Thermal Testing ${thermalforms.Station} ${thermalforms.shift} ${thermalforms.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -241,7 +241,7 @@ export function Thermal3() {
                         testing: `Thermal Testing ${thermalforms.Station} ${thermalforms.shift} ${thermalforms.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -315,7 +315,7 @@ export function Thermal4() {
                         testing: `Thermal Testing ${thermalforms.Station} ${thermalforms.shift} ${thermalforms.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -389,7 +389,7 @@ export function Thermal5() {
                         testing: `Thermal Testing ${thermalforms.Station} ${thermalforms.shift} ${thermalforms.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -463,7 +463,7 @@ export function Thermal6() {
                         testing: `Thermal Testing ${thermalforms.Station} ${thermalforms.shift} ${thermalforms.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -541,7 +541,7 @@ export function Thermal7() {
                         testing: `Thermal Testing ${thermalforms.Station} ${thermalforms.shift} ${thermalforms.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -574,7 +574,7 @@ export function Thermal7() {
                         testing: `Thermal Testing ${thermalforms.Station} ${thermalforms.shift} ${thermalforms.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -654,7 +654,7 @@ export function Thermal8() {
                         testing: `Thermal Testing ${thermalforms.Station} ${thermalforms.shift} ${thermalforms.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -729,7 +729,7 @@ export function Thermal9() {
                         testing: `Thermal Testing ${thermalforms.Station} ${thermalforms.shift} ${thermalforms.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -804,7 +804,7 @@ export function Thermal10() {
                         testing: `Thermal Testing ${thermalforms.Station} ${thermalforms.shift} ${thermalforms.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -878,7 +878,7 @@ export function Thermal11() {
                         testing: `Thermal Testing ${thermalforms.Station} ${thermalforms.shift} ${thermalforms.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -953,7 +953,7 @@ export function Thermal12() {
                             testing: `Thermal Testing ${thermalforms.Station} ${thermalforms.shift} ${thermalforms.date}`,
                             failurestep: form
                         }                                     
-                        await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                        //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                         history.push(nextPath)
                     }
                 })
@@ -1016,7 +1016,7 @@ export function Thermal13() {
                 testing: `Thermal Testing ${thermalforms.Station} ${thermalforms.shift} ${thermalforms.date}`,
                 failurestep: form
             }                                     
-            await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+            //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
             dispatch(pvaActions.step13_status('no'))
         }
         SweetAlert.fire({

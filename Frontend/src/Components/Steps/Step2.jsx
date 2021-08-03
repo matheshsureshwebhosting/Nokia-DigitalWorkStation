@@ -64,7 +64,7 @@ import { withRouter } from 'react-router-dom';
                                 testing: `Vaccume Testing ${machine_Sl_No} ${shift} ${date}`,
                                 failurestep: "Step 1"
                             }                    
-                            await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                          //  //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                             this.props.history.push("/step3")
                         }
                     })

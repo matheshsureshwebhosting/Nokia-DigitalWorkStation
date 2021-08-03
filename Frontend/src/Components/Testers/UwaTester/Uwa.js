@@ -66,7 +66,7 @@ function Uwa(props) {
                         testing: `Uwa Testing ${uwaform.Station} ${uwaform.shift} ${uwaform.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -142,7 +142,7 @@ function Uwa2() {
                         testing: `Uwa Testing ${uwaform.Station} ${uwaform.shift} ${uwaform.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -220,7 +220,7 @@ function Uwa3() {
                         testing: `Uwa Testing ${uwaform.Station} ${uwaform.shift} ${uwaform.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -298,7 +298,7 @@ function Uwa4() {
                         testing: `Uwa Testing ${uwaform.Station} ${uwaform.shift} ${uwaform.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -376,7 +376,7 @@ function Uwa5() {
                         testing: `Uwa Testing ${uwaform.Station} ${uwaform.shift} ${uwaform.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -453,7 +453,7 @@ function Uwa6() {
                         testing: `Uwa Testing ${uwaform.Station} ${uwaform.shift} ${uwaform.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -531,7 +531,7 @@ function Uwa7() {
                         testing: `Uwa Testing ${uwaform.Station} ${uwaform.shift} ${uwaform.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -608,7 +608,7 @@ function Uwa8() {
                         testing: `Uwa Testing ${uwaform.Station} ${uwaform.shift} ${uwaform.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -685,7 +685,7 @@ function Uwa9() {
                         testing: `Uwa Testing ${uwaform.Station} ${uwaform.shift} ${uwaform.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -751,7 +751,7 @@ function Uwa10(props) {
                 testing: `Uwa Testing ${uwaform.Station} ${uwaform.shift} ${uwaform.date}`,
                 failurestep: form
             }                                     
-            await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+            //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
             dispatch(uwaActions.step10_status('no'))
         }
         SweetAlert.fire({

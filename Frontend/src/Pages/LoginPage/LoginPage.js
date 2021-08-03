@@ -3,6 +3,7 @@ import '../Styles/Pages.css'
 import { Navbar } from '../../Components/Navbar/Navbar'
 import axios from "axios"
 import { Redirect, useHistory } from "react-router-dom"
+import { Link } from 'react-router-dom'
 function LoginPage() {
     const [pageHandle, setPageHandle] = useState('');
     const [name, setname] = useState("")
@@ -50,7 +51,7 @@ function LoginPage() {
         }
     }
     if (localStorage.getItem("token") !== null) {
-        return <Redirect to='/home' />
+        return <Redirect to='/dashboard' />
     }
     // Form page changing classes
     const formContainer = pageHandle === 'show_SignUp' ? 'right-panel-active form-wrap' : pageHandle === 'show_SignIn' ? 'form-wrap' : 'form-wrap';
@@ -94,12 +95,12 @@ function LoginPage() {
                             <div className="overlay-panel overlay-left">
                                 <h1>Welcome Back!</h1>
                                 <p>porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur</p>
-                                <button className="ghost" onClick={signInHandler}>Sign In</button>
+                                <Link to="/login"><button className="ghost">Sign In</button></Link>
                             </div>
                             <div className="overlay-panel overlay-right">
                                 <h1>Hello!</h1>
                                 <p>porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur</p>
-                                <button className="ghost" onClick={signUpHandler}>Sign Up</button>
+                                <Link to="/login"><button className="ghost">Sign Up</button></Link>
                             </div>
                         </div>
                     </div>

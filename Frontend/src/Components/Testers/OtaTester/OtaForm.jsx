@@ -16,7 +16,8 @@ export class Testerform extends Component {
             stationError: false,
             nameError: false,
             operator_name: '',
-            istesterform: false
+            istesterform: false,
+            location: ''
         }
     }
 
@@ -70,7 +71,6 @@ export class Testerform extends Component {
         localStorage.setItem("stationid", this.state.Station)
         const { istesterform } = this.state
         if (istesterform === true) {
-            alert("okay")
             return <Redirect to={
                 {
                     pathname: "/OTA",

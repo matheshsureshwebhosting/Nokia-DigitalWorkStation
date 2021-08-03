@@ -6,9 +6,9 @@ const removeFile = util.promisify(fs.unlink)
 const moment = require('moment')
 
 router.post("/send", (req, res) => {
-    const { time, shift, machine_Sl_No, station, catridge_used, temperature, checked_by, status } = req.body
+    const { time, shift,defaultTemp, machine_Sl_No, station, catridge_used, temperature, checked_by, status } = req.body
     var date = moment().format("YYYY-MM-DD")
-    var sql = `INSERT INTO solderingtable (date,time,shift,machine_Sl_No,station,catridge_used,temperature,checked_by,description,status) VALUES ('${date}','${time}','${shift}','not provide','${station}','${catridge_used}','${temperature}','${checked_by}','Not Provided','${status}')`;
+    var sql = `INSERT INTO solderingtable (date,time,shift,defaultTemp,machine_Sl_No,station,catridge_used,temperature,checked_by,description,status) VALUES ('${date}','${time}','${shift}','${defaultTemp}','${machine_Sl_No}','${station}','${catridge_used}','${temperature}','${checked_by}','Not Provided','${status}')`;
     db.query(sql, function (err, result) {
         if (err) {
             return res.send(err)

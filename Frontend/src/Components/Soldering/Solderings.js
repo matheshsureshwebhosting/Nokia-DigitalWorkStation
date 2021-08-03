@@ -151,6 +151,7 @@ export default class Solderings extends Component {
                     date: Solderform.date,
                     shift: Solderform.shift,
                     station: Solderform.Station,
+                    defaultTemp: this.state.tempValid,
                     catridge_used: solder_model,
                     temperature: temp,
                     checked_by: Solderform.operator_name,
@@ -484,9 +485,9 @@ export default class Solderings extends Component {
                                             </div>
 
                                             <div autoFocus className='tempcounter d-flex w-50 justify-content-center rounded-pill bg-danger border border-warning p-1'>
-                                                <button className='w-25 border-0 bg-transparent white' onClick={this.decrement}><i className="fa fa-minus"></i></button>
+                                                <button className='p-0 border-0 bg-transparent white' onClick={this.decrement}><i className="fa fa-minus"></i></button>
                                                 <input value={temp} name="temperature" onChange={(e) => this.handlechange(e)} className='selected-temp-inp w-50 white bg-transparent border-0' />
-                                                <button className='w-25 border-0 fw-bold bg-transparent white' onClick={this.increment} ><i className="fa fa-plus"></i></button>
+                                                <button className='p-0 border-0 fw-bold bg-transparent white' onClick={this.increment} ><i className="fa fa-plus"></i></button>
                                             </div>
                                         </div>
                                     </div>

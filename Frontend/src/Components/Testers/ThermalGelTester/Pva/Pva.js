@@ -76,7 +76,7 @@ export function Pva(props) {
                             testing: `PVA Testing ${pvaform.Station} ${pvaform.shift} ${pvaform.date}`,
                             failurestep: form
                         }                                     
-                        await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                        //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                         history.push(nextPath)
                     }
                 })
@@ -142,7 +142,7 @@ export function Pva2() {
                         testing: `PVA Testing ${pvaform.Station} ${pvaform.shift} ${pvaform.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -210,7 +210,7 @@ export function Pva3() {
                         testing: `PVA Testing ${pvaform.Station} ${pvaform.shift} ${pvaform.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -277,7 +277,7 @@ export function Pva4() {
                         testing: `PVA Testing ${pvaform.Station} ${pvaform.shift} ${pvaform.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -344,7 +344,7 @@ export function Pva5() {
                         testing: `PVA Testing ${pvaform.Station} ${pvaform.shift} ${pvaform.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -411,7 +411,7 @@ export function Pva6() {
                         testing: `PVA Testing ${pvaform.Station} ${pvaform.shift} ${pvaform.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -478,7 +478,7 @@ export function Pva7() {
                         testing: `PVA Testing ${pvaform.Station} ${pvaform.shift} ${pvaform.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -550,7 +550,7 @@ export function Pva8() {
                         testing: `PVA Testing ${pvaform.Station} ${pvaform.shift} ${pvaform.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -617,7 +617,7 @@ export function Pva9() {
                         testing: `PVA Testing ${pvaform.Station} ${pvaform.shift} ${pvaform.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -684,7 +684,7 @@ export function Pva10() {
                         testing: `PVA Testing ${pvaform.Station} ${pvaform.shift} ${pvaform.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -751,7 +751,7 @@ export function Pva11() {
                         testing: `PVA Testing ${pvaform.Station} ${pvaform.shift} ${pvaform.date}`,
                         failurestep: form
                     }                                     
-                    await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                    //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
             })
@@ -819,7 +819,7 @@ export function Pva12() {
                             testing: `PVA Testing ${pvaform.Station} ${pvaform.shift} ${pvaform.date}`,
                             failurestep: form
                         }                                     
-                        await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                        //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                         history.push(nextPath)
                     }
                 })
@@ -867,7 +867,7 @@ export function Pva13() {
                 testing: `PVA Testing ${pvaform.Station} ${pvaform.shift} ${pvaform.date}`,
                 failurestep: form
             }                                     
-            await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+            //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
         }
         SweetAlert.fire({
             title: 'AM for PVA Completed - Succesfully',

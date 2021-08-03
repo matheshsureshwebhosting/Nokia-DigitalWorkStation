@@ -6,9 +6,9 @@ const util = require("util")
 const removeFile = util.promisify(fs.unlink)
 
 router.post("/send", (req, res) => {
-    const {  shift, operator_name, uwa1, uwa2, uwa3, uwa4, uwa5, uwa6, uwa7, uwa8, uwa9, uwa10, uwatime1, uwatime2, uwatime3, uwatime4, uwatime5, uwatime6, uwatime7, uwatime8, uwatime9, uwatime10, description, status, avg, statuslists } = req.body
+    const {  shift, operator_name, uwa1, uwa2, uwa3, uwa4, uwa5, uwa6, uwa7, uwa8, uwa9, uwa10, uwatime1, uwatime2, uwatime3, uwatime4, uwatime5, uwatime6, uwatime7, uwatime8, uwatime9, uwatime10, description, status, avg, statuslists,station  } = req.body
     var date = moment().format("YYYY-MM-DD")
-    var sql = `INSERT INTO uwatable (date,machine_Sl_No,shift, checked_by, uwa1, uwa2, uwa3, uwa4, uwa5, uwa6, uwa7, uwa8,uwa9,uwa10,uwatime1,uwatime2,uwatime3,uwatime4,uwatime5,uwatime6,uwatime7,uwatime8,uwatime9,uwatime10,description,status,average,statuslists) VALUES ('${date}','Not Provide','${shift}','${operator_name}','${uwa1}','${uwa2}','${uwa3}','${uwa4}','${uwa5}','${uwa6}','${uwa7}','${uwa8}','${uwa9}','${uwa10}','${uwatime1}','${uwatime2}','${uwatime3}','${uwatime4}','${uwatime5}','${uwatime6}','${uwatime7}','${uwatime8}','${uwatime9}','${uwatime10}','${description}','${status}','${avg}','${statuslists}')`;
+    var sql = `INSERT INTO uwatable (date,machine_Sl_No, station, shift, checked_by, uwa1, uwa2, uwa3, uwa4, uwa5, uwa6, uwa7, uwa8,uwa9,uwa10,uwatime1,uwatime2,uwatime3,uwatime4,uwatime5,uwatime6,uwatime7,uwatime8,uwatime9,uwatime10,description,status,average,statuslists) VALUES ('${date}','Not Provide','${station}','${shift}','${operator_name}','${uwa1}','${uwa2}','${uwa3}','${uwa4}','${uwa5}','${uwa6}','${uwa7}','${uwa8}','${uwa9}','${uwa10}','${uwatime1}','${uwatime2}','${uwatime3}','${uwatime4}','${uwatime5}','${uwatime6}','${uwatime7}','${uwatime8}','${uwatime9}','${uwatime10}','${description}','${status}','${avg}','${statuslists}')`;
     db.query(sql, function (err, result) {
         if (err) {
             console.log(err)
