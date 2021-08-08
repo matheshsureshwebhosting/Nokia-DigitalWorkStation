@@ -95,6 +95,13 @@ export default class ThermalTable extends Component {
             <>
                 <div className='p-3 container-fluid'>
                     <h3 className='text-center mb-4' style={{ marginBottom: "10px !important" }}>Thermal Checklist </h3>
+                    <div><input type="date" name="chartdate" onChange={(e) => this.handleChange(e)} /></div>
+                    <select className="form-select" onChange={e => this.shiftfilter(e)}>
+                        <option value="none">Filter By Shift</option>
+                        <option value="Shift A">Shift A</option>
+                        <option value="Shift B" >Shift B</option>
+                        <option value="Shift C">Shift C</option>
+                    </select>
                     <Chart
                         width={'500px'}
                         height={'300px'}

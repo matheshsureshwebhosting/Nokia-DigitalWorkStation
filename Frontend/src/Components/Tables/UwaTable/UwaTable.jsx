@@ -11,7 +11,7 @@ export default class UwaTable extends Component {
             uwa: null,
             from: null,
             to: null,
-            chart:[]
+            chart: []
         }
     }
     componentDidMount = () => {
@@ -94,35 +94,68 @@ export default class UwaTable extends Component {
     }
     drawChart = async () => {
         const drawChart = await axios.get(`${process.env.REACT_APP_SERVER_ORIGIN}/uwa/tempeview`).then((res) => { return res.data })
-        if (drawChart) {          
-          this.setState({chart:drawChart})
+        if (drawChart) {
+            this.setState({ chart: drawChart })
         }
 
     }
     render() {
-        const { uwa,chart } = this.state
+        const { uwa, chart } = this.state
         return (
             <>
                 <div className='p-3 container-fluid'>
                     <h3 className='text-center mb-4' style={{ marginBottom: "10px !important" }}>Testers Checklist UWA</h3>
-                    <Chart
-                        width={'500px'}
-                        height={'300px'}
-                        chartType="Bar"
-                        loader={<div>Loading Chart</div>}
-                        data={chart}
-                        options={{
-                            // Material design options
-                            chart: {
-                                title: 'UWA Complaince Report',
-                                subtitle: 'Datewise / Shiftwise',
+                    <div><input type="date" name="chartdate" onChange={(e) => this.handleChange(e)} /></div>
+                    <select className="form-select" onChange={e => this.shiftfilter(e)}>
+                        <option value="none">Filter By Shift</option>
+                        <option value="Shift A">Shift A</option>
+                        <option value="Shift B" >Shift B</option>
+                        <option value="Shift C">Shift C</option>
+                    </select>
+                    <div className='d-flex justify-content-around'>
+                        <Chart
+                            width={'500px'}
+                            height={'300px'}
+                            chartType="Bar"
+                            loader={<div>Loading Chart</div>}
+                            data={chart}
+                            options={{
+                                // Material design options
+                                chart: {
+                                    title: 'UWA Complaince Report',
+                                    subtitle: 'Datewise / Shiftwise',
 
-                            },
-                            colors: ['#2b78e3', '#ff9326', 'grey'],
-                        }}
-                        // For tests
-                        rootProps={{ 'data-testid': '2' }}
-                    />
+                                },
+                                colors: ['#2b78e3', '#ff9326', 'grey'],
+                            }}
+                            // For tests
+                            rootProps={{ 'data-testid': '2' }}
+                        />
+                        <Chart
+                            width={'500px'}
+                            height={'300px'}
+                            chartType="Bar"
+                            loader={<div>Loading Chart</div>}
+                            data={[
+                                ['Machine', 'Total points', 'No of OK', 'No of NOK'],
+                                ['Machine1', 12, 10, 2],
+                                ['Machine2', 13, 12, 1],
+                                ['Machine3', 14, 10, 4],
+                                ['Machine4', 12, 9, 3],
+                            ]}
+                            options={{
+                                // Material design options
+                                chart: {
+                                    title: 'UWA Complaince Report',
+                                    subtitle: 'Datewise ',
+
+                                },
+                                colors: ['#2b78e3', '#ff9326', 'grey'],
+                            }}
+                            // For tests
+                            rootProps={{ 'data-testid': '2' }}
+                        />
+                    </div>
                     <div className='d-flex justify-content-between my-2'>
                         <div className="d-flex">
                             <div className="pt-1">

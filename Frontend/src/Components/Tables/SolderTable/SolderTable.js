@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { Component } from 'react'
 import { Table } from 'react-bootstrap'
 import Chart from "react-google-charts";
+import { Bar } from 'react-chartjs-2';
 import moment from "moment"
 export default class SolderTable extends Component {
     constructor(props) {
@@ -11,8 +12,8 @@ export default class SolderTable extends Component {
             from: null,
             to: null,
             chartdate: "",
-            sations: [],
-            counts:[]
+            stations: [],
+            counts: []
         }
     }
     componentDidMount = () => {
@@ -20,6 +21,7 @@ export default class SolderTable extends Component {
             this.setState({
                 soldering: res.data
             })
+            console.log(this.state.soldering)
         })
         const today = moment().format("YYYY-MM-DD")
         this.setState({
@@ -104,37 +106,61 @@ export default class SolderTable extends Component {
     drawChart = async (chartDate) => {
         const drawChart = await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/soldering/tempeview`, { date: chartDate }).then((res) => { return res.data })
         if (drawChart) {
-           const {chartdata,countdata}=drawChart
-           this.setState({sations:chartdata,counts:countdata})
+            const { chartdata, countdata } = drawChart
+            this.setState({ stations: chartdata, counts: countdata })
         }
-
     }
+
     render() {
-        const { soldering, sations, counts,chartdate } = this.state        
+        const { soldering, stations, counts, chartdate } = this.state
+        // const maxTemp = stations.filter(res => res.defaultTemp !== '')
+        // const s = maxTemp.map(x => x.defaultTemp)
+        console.log(stations)
+        const data = {
+            labels: ['STTC 160', 'STTC 804L', 'STTC 836', 'STTC 836', 'STTC 836'],
+            datasets: [
+                {
+                    type: 'line',
+                    label: 'MaxTemp',
+                    borderColor: 'rgb(54, 162, 235)',
+                    borderWidth: 2,
+                    fill: false,
+                    data: [395, 415, 400, 369, 365],
+                },
+                {
+                    type: 'bar',
+                    label: 'Actual Temp',
+                    backgroundColor: 'rgb(75, 192, 192,0.5)',
+                    data: [388, 409, 395, 362, 359],
+                },
+                {
+                    type: 'line',
+                    label: 'MinTemp',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    data: [385, 405, 390, 359, 355],
+                    borderColor: 'red',
+                    borderWidth: 2,
+                },
+
+            ],
+        };
+        var options = {
+            scales: {
+                y: {
+                    min: 300,
+                    max: 500,
+                }
+            }
+        };
         return (
             <>
                 <div className='p-3 container-fluid'>
                     <h3 className='text-center mb-4' style={{ marginBottom: "10px !important" }}>Solder Tip Temperature Monitoring</h3>
                     <div><input type="date" name="chartdate" value={chartdate} onChange={(e) => this.handleChange(e)} /></div>
                     <div className='d-flex justify-content-between p-5'>
-                        <Chart
-                            width={'500px'}
-                            height={'300px'}
-                            chartType="Bar"
-                            loader={<div>Loading Chart</div>}
-                            data={sations}
-                            options={{
-                                // Material design options
-                                chart: {
-                                    title: 'Soldering ToolTip Testing Performance',
-                                    subtitle: 'Shiftwise',
-
-                                },
-                                colors: ['#2b78e3', '#ff9326'],
-                            }}
-                            // For tests
-                            rootProps={{ 'data-testid': '2' }}
-                        />
+                        <div style={{ width: '450px', height: '450px' }} className='p-3 m-4'>
+                            <Bar data={data} options={options} />
+                        </div>
                         <Chart
                             width={'500px'}
                             height={'300px'}
@@ -146,7 +172,6 @@ export default class SolderTable extends Component {
                                 chart: {
                                     title: 'Soldering Complaince Report',
                                     subtitle: 'Datewise / Shiftwise',
-
                                 },
                                 colors: ['#2b78e3', '#ff9326'],
                             }}

@@ -121,7 +121,7 @@ CREATE TABLE `solderingtable` (
   `machine_Sl_No` varchar(255) DEFAULT NULL,
   `station` varchar(255) DEFAULT NULL,
   `catridge_used` varchar(255) DEFAULT NULL,
-  `temperature` varchar(255) DEFAULT NULL,
+  `temperature` int(11) NOT NULL,
   `checked_by` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
