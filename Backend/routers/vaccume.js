@@ -1,6 +1,6 @@
 const router = require("express").Router()
 const db = require("../database/mySql")
-const moment=require("moment")
+const moment = require("moment")
 const fs = require("fs")
 const util = require("util")
 const removeFile = util.promisify(fs.unlink)
@@ -16,7 +16,7 @@ router.get("/", (req, res) => {
 })
 
 router.post("/send", (req, res) => {
-    const {  shift, machine_Sl_No, checked_by,pressure_guage_value, process1_result, process2_result, process3_result, process4_result, process5_result, process6_result, process7_result, process8_result, process9_result, process1_time, process2_time, process3_time, process4_time, process5_time, process6_time, process7_time, process8_time, process9_time, status, avg, statuslists } = req.body
+    const { shift, machine_Sl_No, checked_by, pressure_guage_value, process1_result, process2_result, process3_result, process4_result, process5_result, process6_result, process7_result, process8_result, process9_result, process1_time, process2_time, process3_time, process4_time, process5_time, process6_time, process7_time, process8_time, process9_time, status, avg, statuslists } = req.body
     var date = moment().format("YYYY-MM-DD")
     var sql = `INSERT INTO vaccumetable (date,shift,machine_Sl_No,checked_by,pressure_guage_value, process1_result, process2_result, process3_result, process4_result, process5_result, process6_result, process7_result, process8_result, process9_result,process1_time, process2_time, process3_time, process4_time, process5_time, process6_time, process7_time, process8_time, process9_time,description,status,average,statuslists) VALUES ('${date}','${shift}','${machine_Sl_No}','${checked_by}','${pressure_guage_value}','${process1_result}','${process2_result}','${process3_result}','${process4_result}','${process5_result}','${process6_result}','${process7_result}','${process8_result}','${process9_result}','${process1_time}','${process2_time}','${process3_time}','${process4_time}','${process5_time}','${process6_time}','${process7_time}','${process8_time}','${process9_time}','Not Provided','${status}','${avg}','${statuslists}')`;
     db.query(sql, function (err, result) {
@@ -84,7 +84,7 @@ router.get("/export", async (req, res) => {
 
                 row.getCell(15).value = data[i].process6_time;
                 row.getCell(16).value = data[i].process6_result;
-                
+
                 row.getCell(17).value = data[i].process7_time;
                 row.getCell(18).value = data[i].process7_result;
 
@@ -112,7 +112,8 @@ router.get("/export", async (req, res) => {
     setTimeout(async () => { await removeFile(`${url.filepath}`) }, 2000)
 })
 
-router.get("/tempeview", async (req, res) => {    
+router.post("/tempeview", async (req, res) => {
+    const { date, shift } = req.body      
     var tempeview = new Promise((resolve, reject) => {
         const daterange11 = `SELECT * FROM vaccumetable`
         db.query(daterange11, function (err, result, fields) {
@@ -123,17 +124,30 @@ router.get("/tempeview", async (req, res) => {
             }
         });
     })
-    var tempeviews=await tempeview
-    var chartData=[['Day', 'Total Points', 'No OK Points', 'No NOK Points']]
-    for(var i=0;i<tempeviews.length;i++){
-        var allaverage=tempeviews[i].average
-        var nokp=allaverage.split("/")[0]
-        var okp=Number(9)-Number(nokp)
-        chartData.push([tempeviews[i].date,9,okp,Number(nokp)])
+    var tempeviews = await tempeview
+    var datefilters
+    if (shift == null){
+        datefilters = tempeviews.filter((data) => { return data.date == date })        
+    } else{
+        datefilters = tempeviews.filter((data) => { return data.date == date && data.shift == shift })
+    }    
+    var chartData = [['Machine', 'Total Points', 'No OK Points', 'No NOK Points']]
+    for (var i = 0; i < datefilters.length; i++) {
+        var allaverage = datefilters[i].average
+        var nokp = allaverage.split("/")[0]
+        var okp = Number(9) - Number(nokp)
+        chartData.push([datefilters[i].machine_Sl_No, 9, okp, Number(nokp)])
     }
-    return res.send(chartData)
-
+    var chartmachine = [['Machine', 'Total Points', 'No OK Points', 'No NOK Points']]
+    for (var i = 0; i < datefilters.length; i++) {
+        var allaverage = datefilters[i].average
+        var nokp = allaverage.split("/")[0]
+        var okp = Number(9) - Number(nokp)
+        chartmachine.push([datefilters[i].machine_Sl_No, 9, okp, Number(nokp)])
+    }  
+    return res.json({chartData:chartData,chartmachine:chartmachine})
 })
+
 
 router.get("/*", (req, res) => {
     return res.send("page not found")

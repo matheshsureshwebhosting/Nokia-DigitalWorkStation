@@ -1,4 +1,5 @@
 import axios from 'axios'
+import moment from 'moment';
 import React, { Component } from 'react'
 // import { Table } from 'reactstrap'
 import { Table } from 'react-bootstrap'
@@ -11,7 +12,9 @@ export default class OtaTable extends Component {
             ota: null,
             from: null,
             to: null,
-            chart: []
+            chartdate: "",
+            chart: [],
+            shift: null,
         }
     }
     componentDidMount = () => {
@@ -20,7 +23,11 @@ export default class OtaTable extends Component {
                 ota: res.data
             })
         })
-        this.drawChart()
+        const today = moment().format("YYYY-MM-DD")
+        this.setState({
+            chartdate: today
+        })
+        this.drawChart(today)
     }
     shiftfilter = async (e) => {
         const shift = e.target.value
@@ -30,13 +37,17 @@ export default class OtaTable extends Component {
         if (shift !== "none") {
             const filtershift = await shiftdata.filter((shifts, index) => { return shifts.shift === shift })
             this.setState({
-                ota: filtershift
+                ota: filtershift,
+                shift: shift
             })
         } else {
             this.setState({
-                ota: shiftdata
+                ota: shiftdata,
+                shift: shift
             })
         }
+        const {chartdate}=this.state
+        this.drawChart(chartdate)
     }
     hanlechange = (e) => {
         this.setState({ [e.target.name]: e.target.value })
@@ -92,34 +103,39 @@ export default class OtaTable extends Component {
         }
     }
 
-    drawChart = async () => {
-        const drawChart = await axios.get(`${process.env.REACT_APP_SERVER_ORIGIN}/ota/tempeview`).then((res) => { return res.data })
+    handleChange = (e) => {
+        this.setState({ [e.target.name]: e.target.value })
+        this.drawChart(e.target.value)
+    }
+    drawChart = async (date) => {
+        const { shift } = this.state
+        const drawChart = await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/ota/tempeview`, { date: date, shift: shift }).then((res) => { return res.data })
         if (drawChart) {
             this.setState({ chart: drawChart })
         }
 
     }
     render() {
-        const { ota, chart } = this.state
-
+        const { ota, chart, chartdate } = this.state
+        const {chartData,chartmachine}=chart
         return (
             <>
                 <div className='p-3 container-fluid'>
                     <h3 className='text-center mb-4' style={{ marginBottom: "10px !important" }}>Testers Checklist OTA</h3>
-                    <div><input type="date" name="chartdate" onChange={(e) => this.handleChange(e)} /></div>
-                    <select className="form-select" onChange={e => this.shiftfilter(e)}>
-                        <option value="none">Filter By Shift</option>
-                        <option value="Shift A">Shift A</option>
-                        <option value="Shift B" >Shift B</option>
-                        <option value="Shift C">Shift C</option>
-                    </select>
+                    <div><input type="date" value={chartdate} name="chartdate" onChange={(e) => this.handleChange(e)} /></div>
+                        <select className="form-select" onChange={e => this.shiftfilter(e)}>
+                            <option value="none">Filter By Shift</option>
+                            <option value="Shift A">Shift A</option>
+                            <option value="Shift B" >Shift B</option>
+                            <option value="Shift C">Shift C</option>
+                        </select>
                     <div className='d-flex justify-content-around'>
                         <Chart
                             width={'500px'}
                             height={'300px'}
                             chartType="Bar"
                             loader={<div>Loading Chart</div>}
-                            data={chart}
+                            data={chartData}
                             options={{
                                 // Material design options
                                 chart: {
@@ -131,19 +147,13 @@ export default class OtaTable extends Component {
                             }}
                             // For tests
                             rootProps={{ 'data-testid': '2' }}
-                        />
-                        <Chart
+                        />                       
+                        {/* <Chart
                             width={'500px'}
                             height={'300px'}
                             chartType="Bar"
                             loader={<div>Loading Chart</div>}
-                            data={[
-                                ['Machine', 'Total points', 'No of OK', 'No of NOK'],
-                                ['Machine1', 12, 10, 2],
-                                ['Machine2', 13, 12, 1],
-                                ['Machine3', 14, 10, 4],
-                                ['Machine4', 12, 9, 3],
-                            ]}
+                            data={chartmachine}
                             options={{
                                 // Material design options
                                 chart: {
@@ -155,7 +165,7 @@ export default class OtaTable extends Component {
                             }}
                             // For tests
                             rootProps={{ 'data-testid': '2' }}
-                        />
+                        /> */}
                     </div>
                     <div className='d-flex justify-content-between my-2'>
                         <div className="d-flex">

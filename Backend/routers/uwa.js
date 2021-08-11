@@ -8,7 +8,7 @@ const removeFile = util.promisify(fs.unlink)
 router.post("/send", (req, res) => {
     const {  shift, operator_name, uwa1, uwa2, uwa3, uwa4, uwa5, uwa6, uwa7, uwa8, uwa9, uwa10, uwatime1, uwatime2, uwatime3, uwatime4, uwatime5, uwatime6, uwatime7, uwatime8, uwatime9, uwatime10, description, status, avg, statuslists,station  } = req.body
     var date = moment().format("YYYY-MM-DD")
-    var sql = `INSERT INTO uwatable (date,machine_Sl_No, station, shift, checked_by, uwa1, uwa2, uwa3, uwa4, uwa5, uwa6, uwa7, uwa8,uwa9,uwa10,uwatime1,uwatime2,uwatime3,uwatime4,uwatime5,uwatime6,uwatime7,uwatime8,uwatime9,uwatime10,description,status,average,statuslists) VALUES ('${date}','Not Provide','${station}','${shift}','${operator_name}','${uwa1}','${uwa2}','${uwa3}','${uwa4}','${uwa5}','${uwa6}','${uwa7}','${uwa8}','${uwa9}','${uwa10}','${uwatime1}','${uwatime2}','${uwatime3}','${uwatime4}','${uwatime5}','${uwatime6}','${uwatime7}','${uwatime8}','${uwatime9}','${uwatime10}','${description}','${status}','${avg}','${statuslists}')`;
+    var sql = `INSERT INTO uwatable (date,machine_Sl_No, shift, checked_by, uwa1, uwa2, uwa3, uwa4, uwa5, uwa6, uwa7, uwa8,uwa9,uwa10,uwatime1,uwatime2,uwatime3,uwatime4,uwatime5,uwatime6,uwatime7,uwatime8,uwatime9,uwatime10,description,status,average,statuslists) VALUES ('${date}','${station}','${shift}','${operator_name}','${uwa1}','${uwa2}','${uwa3}','${uwa4}','${uwa5}','${uwa6}','${uwa7}','${uwa8}','${uwa9}','${uwa10}','${uwatime1}','${uwatime2}','${uwatime3}','${uwatime4}','${uwatime5}','${uwatime6}','${uwatime7}','${uwatime8}','${uwatime9}','${uwatime10}','${description}','${status}','${avg}','${statuslists}')`;
     db.query(sql, function (err, result) {
         if (err) {
             console.log(err)
@@ -29,7 +29,8 @@ router.get("/", (req, res) => {
     });
 })
 
-router.get("/tempeview", async (req, res) => {    
+router.post("/tempeview", async (req, res) => {
+    const { date, shift } = req.body      
     var tempeview = new Promise((resolve, reject) => {
         const daterange11 = `SELECT * FROM uwatable`
         db.query(daterange11, function (err, result, fields) {
@@ -40,16 +41,28 @@ router.get("/tempeview", async (req, res) => {
             }
         });
     })
-    var tempeviews=await tempeview
-    var chartData=[['Day', 'Total Points', 'No OK Points', 'No NOK Points']]
-    for(var i=0;i<tempeviews.length;i++){
-        var allaverage=tempeviews[i].average
-        var nokp=allaverage.split("/")[0]
-        var okp=Number(10)-Number(nokp)
-        chartData.push([tempeviews[i].date,9,okp,Number(nokp)])
+    var tempeviews = await tempeview
+    var datefilters
+    if (shift == null){
+        datefilters = tempeviews.filter((data) => { return data.date == date })        
+    } else{
+        datefilters = tempeviews.filter((data) => { return data.date == date && data.shift == shift })
+    }    
+    var chartData = [['Machine', 'Total Points', 'No OK Points', 'No NOK Points']]
+    for (var i = 0; i < datefilters.length; i++) {
+        var allaverage = datefilters[i].average
+        var nokp = allaverage.split("/")[0]
+        var okp = Number(9) - Number(nokp)
+        chartData.push([datefilters[i].machine_Sl_No, 9, okp, Number(nokp)])
     }
-    return res.send(chartData)
-
+    var chartmachine = [['Machine', 'Total Points', 'No OK Points', 'No NOK Points']]
+    for (var i = 0; i < datefilters.length; i++) {
+        var allaverage = datefilters[i].average
+        var nokp = allaverage.split("/")[0]
+        var okp = Number(9) - Number(nokp)
+        chartmachine.push([datefilters[i].machine_Sl_No, 9, okp, Number(nokp)])
+    }  
+    return res.json({chartData:chartData,chartmachine:chartmachine})
 })
 
 router.post("/datefilter", (req, res) => {

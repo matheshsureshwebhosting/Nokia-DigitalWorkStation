@@ -20,8 +20,7 @@ export default class SolderTable extends Component {
         axios.get(`${process.env.REACT_APP_SERVER_ORIGIN}/soldering`).then((res) => {
             this.setState({
                 soldering: res.data
-            })
-            console.log(this.state.soldering)
+            })            
         })
         const today = moment().format("YYYY-MM-DD")
         this.setState({
@@ -113,11 +112,9 @@ export default class SolderTable extends Component {
 
     render() {
         const { soldering, stations, counts, chartdate } = this.state
-        // const maxTemp = stations.filter(res => res.defaultTemp !== '')
-        // const s = maxTemp.map(x => x.defaultTemp)
-        console.log(stations)
+        const {MaxTemp,MinTemp,acttemp,labels}=stations
         const data = {
-            labels: ['STTC 160', 'STTC 804L', 'STTC 836', 'STTC 836', 'STTC 836'],
+            labels:labels,
             datasets: [
                 {
                     type: 'line',
@@ -125,19 +122,19 @@ export default class SolderTable extends Component {
                     borderColor: 'rgb(54, 162, 235)',
                     borderWidth: 2,
                     fill: false,
-                    data: [395, 415, 400, 369, 365],
+                    data: MaxTemp,
                 },
                 {
                     type: 'bar',
                     label: 'Actual Temp',
                     backgroundColor: 'rgb(75, 192, 192,0.5)',
-                    data: [388, 409, 395, 362, 359],
+                    data: acttemp,
                 },
                 {
                     type: 'line',
                     label: 'MinTemp',
                     backgroundColor: 'rgb(255, 99, 132)',
-                    data: [385, 405, 390, 359, 355],
+                    data: MinTemp,
                     borderColor: 'red',
                     borderWidth: 2,
                 },

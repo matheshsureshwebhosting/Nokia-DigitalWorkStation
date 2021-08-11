@@ -6,9 +6,9 @@ const removeFile = util.promisify(fs.unlink)
 const moment = require('moment')
 
 router.post("/send", (req, res) => {
-    const { time, shift,defaultTemp, machine_Sl_No, station, catridge_used, temperature, checked_by, status } = req.body
+    const { time, shift, defaultTemp, machine_Sl_No, station, catridge_used, temperature, checked_by, status } = req.body
     var date = moment().format("YYYY-MM-DD")
-    var sql = `INSERT INTO solderingtable (date,time,shift,defaultTemp,machine_Sl_No,station,catridge_used,temperature,checked_by,description,status) VALUES ('${date}','${time}','${shift}','${defaultTemp}','${machine_Sl_No}','${station}','${catridge_used}','${temperature}','${checked_by}','Not Provided','${status}')`;
+    var sql = `INSERT INTO solderingtable (date,time,shift,defaultTemp,machine_Sl_No,station,catridge_used,temperature,checked_by,description,status) VALUES ('${date}','${time}','${shift}','${defaultTemp}','${station}','${station}','${catridge_used}','${temperature}','${checked_by}','Not Provided','${status}')`;
     db.query(sql, function (err, result) {
         if (err) {
             return res.send(err)
@@ -87,7 +87,7 @@ router.get("/export", async (req, res) => {
 
 router.post("/tempeview", async (req, res) => {
     const { date } = req.body
-    
+
     var tempeview = new Promise((resolve, reject) => {
         const daterange11 = `SELECT * FROM solderingtable WHERE date=?`
         db.query(daterange11, [date], function (err, result, fields) {
@@ -98,13 +98,24 @@ router.post("/tempeview", async (req, res) => {
             }
         });
     })
-    var chartdata = [['Stations', 'Standard Temp', 'Measured']], countdata = [['Count', 'Count']]
+     countdata = [['Count', 'Count']]
+    var labels = [], MaxTemp = [], MinTemp = [], acttemp = []
     var tempView = await tempeview
     for (var i = 0; i < tempView.length; i++) {
-        chartdata.push([tempView[i].station, tempView[i].defaultTemp, tempView[i].temperature])
-    }            
-    countdata.push([date, tempView.length])       
-    return res.json({ chartdata: chartdata, countdata: countdata })
+        labels.push(tempView[i].station)
+        var maxtemp = Number(tempView[i].defaultTemp) + Number(10)
+        var mintemp = Number(tempView[i].defaultTemp) - Number(10)
+        MaxTemp.push(maxtemp)
+        MinTemp.push(mintemp)
+        acttemp.push(tempView[i].temperature)
+    }
+    countdata.push([date, tempView.length])
+    return res.json({ chartdata: {
+        labels:labels,
+        MaxTemp:MaxTemp,
+        MinTemp:MinTemp,
+        acttemp:acttemp
+    }, countdata: countdata })
 
 })
 

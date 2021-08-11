@@ -1,49 +1,34 @@
 const router = require("express").Router()
-// var nodemailer = require('nodemailer')
-const {SMTPClient} = require('smtp-client')
+const email = require('emailjs')
+const SMTPClient = email.SMTPClient 
 
 
-
-
-let smtpTransport = new SMTPClient({
-    host: process.env.EMAIL_HOST,
-    secure: process.env.EMAIL_SECURE,
-    port: process.env.EMAIL_PORT,
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-    },
-    tls: {
-        rejectUnauthorized: false
-    }
-});
 
 router.post("/", async (req, res) => {
-    const { name, testing, failurestep } = req.body
-    const html =
-        `
-   <p><b>${name}</b><p>
-   <p><b>${testing}</b><p>
-   <p><b>${failurestep}</b><p>
-   
-   `
-    mailOptions = {
-        from: process.env.EMAIL_USER,
-        to: "s.kalidas120799@gmail.com",
-        subject: "Testing Information",
-        text: "Hello world?",
-        html: html,
-    }
-    smtpTransport.sendMail(mailOptions, function (error, response) {
-        if (error) {
-            console.log(error);
-            return res.send(false)
-        } else {
-            console.log(response)
-            return res.send(true)
-
-        }
+    const client = new SMTPClient({
+      //    host: '10.130.128.30',
+      host: "mailrelay.int.nokia.com",
     });
+    
+  
+    client.send(
+      {
+        text: "Notification for Solder Tip Monitoring",
+        from: "DWSAlerts@nokia.com",
+        to: 'balachander.marimuthu@nokia.com',
+        cc: 'agni.gnanamani@nokia.com',
+        subject: "Notification for Solder Tip Monitoring",
+      },
+      (err, message) => {
+          if(err){
+              console.log(err)
+          }else{
+              res.status(200).send("mail Sent Successfully")
+          }
+        // console.log(err || message);
+      }
+  
+    )
 })
 
 

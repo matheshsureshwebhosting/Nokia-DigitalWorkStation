@@ -15,6 +15,7 @@ export default class VacuumTable extends Component {
             to: null,
             chartdate: "",
             chart: [],
+            shift: null,
         }
     }
     componentDidMount = () => {
@@ -23,8 +24,11 @@ export default class VacuumTable extends Component {
                 vaccumetable: res.data
             })
         })
-
-        this.drawChart()
+        const today = moment().format("YYYY-MM-DD")
+        this.setState({
+            chartdate: today
+        })
+        this.drawChart(today)
     }
     shiftfilter = async (e) => {
         const shift = e.target.value
@@ -34,13 +38,17 @@ export default class VacuumTable extends Component {
         if (shift !== "none") {
             const filtershift = await shiftdata.filter((shifts, index) => { return shifts.shift === shift })
             this.setState({
-                vaccumetable: filtershift
+                vaccumetable: filtershift,
+                shift: shift
             })
         } else {
             this.setState({
-                vaccumetable: shiftdata
+                vaccumetable: shiftdata,
+                shift: shift
             })
         }
+        const {chartdate}=this.state
+        this.drawChart(chartdate)
     }
     hanlechange = (e) => {
         this.setState({ [e.target.name]: e.target.value })
@@ -96,22 +104,27 @@ export default class VacuumTable extends Component {
             })
         }
     }
-
-    drawChart = async () => {
-        const drawChart = await axios.get(`${process.env.REACT_APP_SERVER_ORIGIN}/vaccume/tempeview`).then((res) => { return res.data })
+    handleChange = (e) => {
+        this.setState({ [e.target.name]: e.target.value })
+        this.drawChart(e.target.value)
+    }
+    drawChart = async (date) => {
+        const { shift } = this.state
+        const drawChart = await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/vaccume/tempeview`, { date: date, shift: shift }).then((res) => { return res.data })
         if (drawChart) {
             this.setState({ chart: drawChart })
         }
 
     }
     render() {
-        const { vaccumetable, chart } = this.state
+        const { vaccumetable, chart, chartdate } = this.state
+        const {chartData,chartmachine}=chart
         return (
             <div>
                 <>
                     <div className='p-3'>
                         <h3 className='text-center mb-4'>Vacuum Lifter Maintenance</h3>
-                        <div><input type="date" name="chartdate" onChange={(e) => this.handleChange(e)} /></div>
+                        <div><input type="date" value={chartdate} name="chartdate" onChange={(e) => this.handleChange(e)} /></div>
                         <select className="form-select" onChange={e => this.shiftfilter(e)}>
                             <option value="none">Filter By Shift</option>
                             <option value="Shift A">Shift A</option>
@@ -124,7 +137,7 @@ export default class VacuumTable extends Component {
                                 height={'300px'}
                                 chartType="Bar"
                                 loader={<div>Loading Chart</div>}
-                                data={chart}
+                                data={chartData}
                                 options={{
                                     // Material design options
                                     chart: {
@@ -137,18 +150,12 @@ export default class VacuumTable extends Component {
                                 // For tests
                                 rootProps={{ 'data-testid': '2' }}
                             />
-                            <Chart
+                            {/* <Chart
                                 width={'500px'}
                                 height={'300px'}
                                 chartType="Bar"
                                 loader={<div>Loading Chart</div>}
-                                data={[
-                                    ['Machine', 'Total points', 'No of OK', 'No of NOK'],
-                                    ['Machine1', 12, 10, 2],
-                                    ['Machine2', 13, 12, 1],
-                                    ['Machine3', 14, 10, 4],
-                                    ['Machine4', 12, 9, 3],
-                                ]}
+                                data={chartmachine}
                                 options={{
                                     // Material design options
                                     chart: {
@@ -160,7 +167,7 @@ export default class VacuumTable extends Component {
                                 }}
                                 // For tests
                                 rootProps={{ 'data-testid': '2' }}
-                            />
+                            /> */}
                         </div>
                         <div className="d-flex justify-content-between my-3">
                             <div className='d-flex'>
