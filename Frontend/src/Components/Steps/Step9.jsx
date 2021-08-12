@@ -8,7 +8,7 @@ import Steps from "./Steps"
 import { withRouter } from 'react-router-dom';
 
 
- class Step9 extends Component {
+class Step9 extends Component {
     static contextType = Slidercontext
     constructor(props) {
         super()
@@ -71,7 +71,7 @@ import { withRouter } from 'react-router-dom';
                     title: 'AM for Vacuum Lifter Completed Succesfully',
                     text: 'Value Should Be -150mm/Hg to -400mm/Hg',
                     confirmButtonText: `Save`,
-                }).then((result) => {
+                }).then(async (result) => {
                     const { date, machine_Sl_No, shift, operator_name, prosses1_result, prosses2_result, prosses3_result, prosses4_result, prosses5_result, prosses6_result, prosses7_result, prosses8_result, prosses1_time, prosses2_time, prosses3_time, prosses4_time, prosses5_time, prosses6_time, prosses7_time, prosses8_time } = this.context
                     const prosses = {
                         "step1": prosses1_result,
@@ -133,6 +133,20 @@ import { withRouter } from 'react-router-dom';
                         statuslists: statuslists,
                         pressure_guage_value: this.state.pressure_guage_value,
                     }
+                    var finalstatuslists = ""
+                    for (var j = 0; j < statuslists.length; j++) {
+                        if (j === 0) {
+                            finalstatuslists = `${statuslists[j]},`
+                        } else {
+                            finalstatuslists += `${statuslists[j]},`
+                        }
+                    }                    
+                    var sendMail = {
+                        name: operator_name,
+                        testing: `Vaccume Testing ${machine_Sl_No} ${shift} ${date}`,
+                        failurestep: finalstatuslists
+                    }
+                        axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data })
                     axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/vaccume/send`, datas).then((res) => {
                         if (res.data === true) {
                             localStorage.removeItem("step1")
@@ -164,15 +178,9 @@ import { withRouter } from 'react-router-dom';
                     text: 'AM for Vacuum Lifter Completed Succesfully',
                     confirmButtonText: `Save`,
                 })
-                    .then(async(result) => {
+                    .then(async (result) => {
                         if (result.isConfirmed) {
-                            const { date, machine_Sl_No, shift, operator_name, prosses1_result, prosses2_result, prosses3_result, prosses4_result, prosses5_result, prosses6_result, prosses7_result, prosses8_result, prosses1_time, prosses2_time, prosses3_time, prosses4_time, prosses5_time, prosses6_time, prosses7_time, prosses8_time } = this.context                            
-                            var sendMail = {
-                                name: operator_name,
-                                testing: `Vaccume Testing ${machine_Sl_No} ${shift} ${date}`,
-                                failurestep: "Step 1"
-                            }                    
-                           // //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
+                            const { date, machine_Sl_No, shift, operator_name, prosses1_result, prosses2_result, prosses3_result, prosses4_result, prosses5_result, prosses6_result, prosses7_result, prosses8_result, prosses1_time, prosses2_time, prosses3_time, prosses4_time, prosses5_time, prosses6_time, prosses7_time, prosses8_time } = this.context                           
                             const prosses = {
                                 "step1": prosses1_result,
                                 "step2": prosses2_result,
@@ -233,7 +241,21 @@ import { withRouter } from 'react-router-dom';
                                 avg: finalavg,
                                 statuslists: statuslists,
                                 pressure_guage_value: this.state.pressure_guage_value,
+                            }                            
+                            var finalstatuslists = ""
+                            for (var j = 0; j < statuslists.length; j++) {
+                                if (j === 0) {
+                                    finalstatuslists = `${statuslists[j]},`
+                                } else {
+                                    finalstatuslists += `${statuslists[j]},`
+                                }
+                            }                    
+                            var sendMail = {
+                                name: operator_name,
+                                testing: `Vaccume Testing ${machine_Sl_No} ${shift} ${date}`,
+                                failurestep: finalstatuslists
                             }
+                                axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data })
                             axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/vaccume/send`, datas).then((res) => {
                                 if (res.data === true) {
                                     localStorage.removeItem("step1")
@@ -259,7 +281,7 @@ import { withRouter } from 'react-router-dom';
                     // showCancelButton: false,
                     confirmButtonText: `Save`,
                 })
-                    .then((result) => {
+                    .then(async(result) => {
                         if (result.isConfirmed) {
                             const { date, machine_Sl_No, shift, operator_name, prosses1_result, prosses2_result, prosses3_result, prosses4_result, prosses5_result, prosses6_result, prosses7_result, prosses8_result, prosses1_time, prosses2_time, prosses3_time, prosses4_time, prosses5_time, prosses6_time, prosses7_time, prosses8_time } = this.context
                             const prosses = {
@@ -322,7 +344,21 @@ import { withRouter } from 'react-router-dom';
                                 avg: finalavg,
                                 statuslists: statuslists,
                                 pressure_guage_value: this.state.pressure_guage_value,
+                            }                            
+                            var finalstatuslists = ""
+                            for (var j = 0; j < statuslists.length; j++) {
+                                if (j === 0) {
+                                    finalstatuslists = `${statuslists[j]},`
+                                } else {
+                                    finalstatuslists += `${statuslists[j]},`
+                                }
+                            }                    
+                            var sendMail = {
+                                name: operator_name,
+                                testing: `Vaccume Testing ${machine_Sl_No} ${shift} ${date}`,
+                                failurestep: finalstatuslists
                             }
+                                axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data })
                             axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/vaccume/send`, datas).then((res) => {
                                 if (res.data === true) {
                                     localStorage.removeItem("step1")

@@ -43,7 +43,7 @@ export function Pva(props) {
     useInterval(() => { setTimer(timer + 1); }, 1000);
     const buttonStatus = timer > 5 ? false : true;
 
-    const onClick = (form, status, nextPath) => {        
+    const onClick = (form, status, nextPath) => {
         const { state } = props.location
         pvaform = state
         if (pvaform === undefined) {
@@ -67,7 +67,7 @@ export function Pva(props) {
                 title: "OK Noted",
                 icon: "info",
             })
-                .then(async(result) => {
+                .then(async (result) => {
                     if (result.isConfirmed) {
                         pvastatus[form] = status
                         pvatime[`${form}time`] = timer
@@ -75,7 +75,7 @@ export function Pva(props) {
                             name: pvaform.operator_name,
                             testing: `PVA Testing ${pvaform.Station} ${pvaform.shift} ${pvaform.date}`,
                             failurestep: form
-                        }                                     
+                        }
                         //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                         history.push(nextPath)
                     }
@@ -133,7 +133,7 @@ export function Pva2() {
             SweetAlert.fire({
                 title: "OK Noted",
                 icon: "info",
-            }).then(async(result) => {
+            }).then(async (result) => {
                 if (result.isConfirmed) {
                     pvastatus[form] = status
                     pvatime[`${form}time`] = timer
@@ -141,7 +141,7 @@ export function Pva2() {
                         name: pvaform.operator_name,
                         testing: `PVA Testing ${pvaform.Station} ${pvaform.shift} ${pvaform.date}`,
                         failurestep: form
-                    }                                     
+                    }
                     //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
@@ -201,7 +201,7 @@ export function Pva3() {
             SweetAlert.fire({
                 title: "OK Noted",
                 icon: "info",
-            }).then(async(result) => {
+            }).then(async (result) => {
                 if (result.isConfirmed) {
                     pvastatus[form] = status
                     pvatime[`${form}time`] = timer
@@ -209,7 +209,7 @@ export function Pva3() {
                         name: pvaform.operator_name,
                         testing: `PVA Testing ${pvaform.Station} ${pvaform.shift} ${pvaform.date}`,
                         failurestep: form
-                    }                                     
+                    }
                     //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
@@ -268,7 +268,7 @@ export function Pva4() {
             SweetAlert.fire({
                 title: "OK Noted",
                 icon: "info",
-            }).then(async(result) => {
+            }).then(async (result) => {
                 if (result.isConfirmed) {
                     pvastatus[form] = status
                     pvatime[`${form}time`] = timer
@@ -276,7 +276,7 @@ export function Pva4() {
                         name: pvaform.operator_name,
                         testing: `PVA Testing ${pvaform.Station} ${pvaform.shift} ${pvaform.date}`,
                         failurestep: form
-                    }                                     
+                    }
                     //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
@@ -335,7 +335,7 @@ export function Pva5() {
             SweetAlert.fire({
                 title: "OK Noted",
                 icon: "info",
-            }).then(async(result) => {
+            }).then(async (result) => {
                 if (result.isConfirmed) {
                     pvastatus[form] = status
                     pvatime[`${form}time`] = timer
@@ -343,7 +343,7 @@ export function Pva5() {
                         name: pvaform.operator_name,
                         testing: `PVA Testing ${pvaform.Station} ${pvaform.shift} ${pvaform.date}`,
                         failurestep: form
-                    }                                     
+                    }
                     //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
@@ -402,7 +402,7 @@ export function Pva6() {
             SweetAlert.fire({
                 title: "OK Noted",
                 icon: "info",
-            }).then(async(result) => {
+            }).then(async (result) => {
                 if (result.isConfirmed) {
                     pvastatus[form] = status
                     pvatime[`${form}time`] = timer
@@ -410,7 +410,7 @@ export function Pva6() {
                         name: pvaform.operator_name,
                         testing: `PVA Testing ${pvaform.Station} ${pvaform.shift} ${pvaform.date}`,
                         failurestep: form
-                    }                                     
+                    }
                     //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
@@ -469,7 +469,7 @@ export function Pva7() {
             SweetAlert.fire({
                 title: "OK Noted",
                 icon: "info",
-            }).then(async(result) => {
+            }).then(async (result) => {
                 if (result.isConfirmed) {
                     pvastatus[form] = status
                     pvatime[`${form}time`] = timer
@@ -477,7 +477,7 @@ export function Pva7() {
                         name: pvaform.operator_name,
                         testing: `PVA Testing ${pvaform.Station} ${pvaform.shift} ${pvaform.date}`,
                         failurestep: form
-                    }                                     
+                    }
                     //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
@@ -541,7 +541,7 @@ export function Pva8() {
             SweetAlert.fire({
                 title: "OK Noted",
                 icon: "info",
-            }).then(async(result) => {
+            }).then(async (result) => {
                 if (result.isConfirmed) {
                     pvastatus[form] = status
                     pvatime[`${form}time`] = timer
@@ -549,7 +549,7 @@ export function Pva8() {
                         name: pvaform.operator_name,
                         testing: `PVA Testing ${pvaform.Station} ${pvaform.shift} ${pvaform.date}`,
                         failurestep: form
-                    }                                     
+                    }
                     //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
@@ -608,7 +608,7 @@ export function Pva9() {
             SweetAlert.fire({
                 title: "OK Noted",
                 icon: "info",
-            }).then(async(result) => {
+            }).then(async (result) => {
                 if (result.isConfirmed) {
                     pvastatus[form] = status
                     pvatime[`${form}time`] = timer
@@ -616,7 +616,7 @@ export function Pva9() {
                         name: pvaform.operator_name,
                         testing: `PVA Testing ${pvaform.Station} ${pvaform.shift} ${pvaform.date}`,
                         failurestep: form
-                    }                                     
+                    }
                     //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
@@ -675,7 +675,7 @@ export function Pva10() {
             SweetAlert.fire({
                 title: "OK Noted",
                 icon: "info",
-            }).then(async(result) => {
+            }).then(async (result) => {
                 if (result.isConfirmed) {
                     pvastatus[form] = status
                     pvatime[`${form}time`] = timer
@@ -683,7 +683,7 @@ export function Pva10() {
                         name: pvaform.operator_name,
                         testing: `PVA Testing ${pvaform.Station} ${pvaform.shift} ${pvaform.date}`,
                         failurestep: form
-                    }                                     
+                    }
                     //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
@@ -742,7 +742,7 @@ export function Pva11() {
             SweetAlert.fire({
                 title: "OK Noted",
                 icon: "info",
-            }).then(async(result) => {
+            }).then(async (result) => {
                 if (result.isConfirmed) {
                     pvastatus[form] = status
                     pvatime[`${form}time`] = timer
@@ -750,7 +750,7 @@ export function Pva11() {
                         name: pvaform.operator_name,
                         testing: `PVA Testing ${pvaform.Station} ${pvaform.shift} ${pvaform.date}`,
                         failurestep: form
-                    }                                     
+                    }
                     //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                     history.push(nextPath)
                 }
@@ -810,7 +810,7 @@ export function Pva12() {
                 title: "OK Noted",
                 icon: "info",
             })
-                .then(async(result) => {
+                .then(async (result) => {
                     if (result.isConfirmed) {
                         pvastatus[form] = status
                         pvatime[`${form}time`] = timer
@@ -818,7 +818,7 @@ export function Pva12() {
                             name: pvaform.operator_name,
                             testing: `PVA Testing ${pvaform.Station} ${pvaform.shift} ${pvaform.date}`,
                             failurestep: form
-                        }                                     
+                        }
                         //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
                         history.push(nextPath)
                     }
@@ -857,16 +857,16 @@ export function Pva13() {
     }
     useInterval(() => { setTimer(timer + 1); }, 1000);
     const buttonStatus = timer > 5 ? false : true;
-    const onClick =async (form, status, nextPath) => {
+    const onClick = async (form, status, nextPath) => {
         if (pvaform === undefined) {
             return history.push("/Pvaform")
         }
-        if(status==="No"){
+        if (status === "No") {
             var sendMail = {
                 name: pvaform.operator_name,
                 testing: `PVA Testing ${pvaform.Station} ${pvaform.shift} ${pvaform.date}`,
                 failurestep: form
-            }                                     
+            }
             //await axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, sendMail).then((res) => { return res.data }) 
         }
         SweetAlert.fire({
@@ -875,7 +875,7 @@ export function Pva13() {
             // showDenyButton: false,
             // showCancelButton: false,
             confirmButtonText: `Save`,
-        }).then((result) => {
+        }).then(async (result) => {
             if (result.isConfirmed) {
                 // const description = document.getElementById("des").value
                 // if (description.length === 0) {
@@ -908,7 +908,7 @@ export function Pva13() {
                     station: pvaform.Station,
                     operator_name: pvaform.operator_name,
                     shift: pvaform.shift,
-                    pressure_guage_value:pvaform.pressure_guage_value,
+                    pressure_guage_value: pvaform.pressure_guage_value,
                     pva1: pvastatus.pva1,
                     pva2: pvastatus.pva2,
                     pva3: pvastatus.pva3,
@@ -939,11 +939,25 @@ export function Pva13() {
                     status: finalstatus,
                     avg: finalavg,
                     statuslists: statuslists
-                }                
+                }
+                var finalstatuslists = ""
+                for (var j = 0; j < statuslists.length; j++) {
+                    if (j === 0) {
+                        finalstatuslists = `${statuslists[j]},`
+                    } else {
+                        finalstatuslists += `${statuslists[j]},`
+                    }
+                }
+                var newsendMail = {
+                    name: pvaform.operator_name,
+                    testing: `UWA Testing ${pvaform.Station} ${pvaform.shift} ${pvaform.date}`,
+                    failurestep: finalstatuslists
+                }
+                 axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, newsendMail).then((res) => { return res.data })
                 axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/Pva/send`, datas).then((res) => {
                     if (res.data === true) {
                     }
-                    history.push("/")    
+                    history.push("/")
                 }).catch((error) => {
                     console.log(error)
                 })

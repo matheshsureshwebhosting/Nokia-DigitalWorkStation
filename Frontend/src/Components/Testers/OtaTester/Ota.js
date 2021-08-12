@@ -721,7 +721,7 @@ function Ota10() {
         SweetAlert.fire({
             title: 'AM for OTA Completed - Successfully',
             confirmButtonText: `Save`,
-        }).then((result) => {
+        }).then(async(result) => {
             if (result.isConfirmed) {
                 otastatus["ota10"] = status
                 const newotastatus = Object.values(otastatus)
@@ -773,6 +773,20 @@ function Ota10() {
                     avg: finalavg,
                     statuslists: statuslists
                 }
+                var finalstatuslists = ""
+                for (var j = 0; j < statuslists.length; j++) {
+                    if (j === 0) {
+                        finalstatuslists = `${statuslists[j]},`
+                    } else {
+                        finalstatuslists += `${statuslists[j]},`
+                    }
+                }    
+                var newsendMail = {
+                    name: otaform.operator_name,
+                    testing: `UWA Testing ${otaform.Station} ${otaform.shift} ${otaform.date}`,
+                    failurestep: finalstatuslists
+                }
+                    axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, newsendMail).then((res) => { return res.data })
                 axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/ota/send`, datas).then((res) => {
                     if (res.data === true) {
                         history.push(nextPath)

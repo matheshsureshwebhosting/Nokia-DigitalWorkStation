@@ -757,7 +757,7 @@ function Uwa10(props) {
         SweetAlert.fire({
             title: 'AM for UWA Completed - Successfully',
             confirmButtonText: `Save`,
-        }).then((result) => {
+        }).then(async(result) => {
             if (result.isConfirmed) {
                 uwastatus["uwa10"] = status
                 const newotastatus = Object.values(uwastatus)
@@ -809,6 +809,20 @@ function Uwa10(props) {
                     avg: finalavg,
                     statuslists: statuslists
                 }
+                var finalstatuslists = ""
+                for (var j = 0; j < statuslists.length; j++) {
+                    if (j === 0) {
+                        finalstatuslists = `${statuslists[j]},`
+                    } else {
+                        finalstatuslists += `${statuslists[j]},`
+                    }
+                }                    
+                var newsendMail = {
+                    name: uwaform.operator_name,
+                    testing: `UWA Testing ${uwaform.Station} ${uwaform.shift} ${uwaform.date}`,
+                    failurestep: finalstatuslists
+                }
+                    axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/mail`, newsendMail).then((res) => { return res.data })
                 axios.post(`${process.env.REACT_APP_SERVER_ORIGIN}/uwa/send`, datas).then((res) => {
                     if (res.data === true) {
                         history.push(nextPath)
